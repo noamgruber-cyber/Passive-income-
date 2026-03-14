@@ -1,0 +1,92 @@
+import { createClient } from '@/lib/supabase/server'
+import { redirect } from 'next/navigation'
+import Link from 'next/link'
+import { formatPrice } from '@/lib/utils'
+import { getTranslations } from 'next-intl/server'
+
+export async function generateMetadata() {
+  const t = await getTranslations('admin')
+  return { title: `${t('dashboard.title')} | LearnHub` }
+}
+
+export default async function AdminDashboardPage() {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) redirect('/login')
+
+  const t = await getTranslations('admin')
+
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('role')
+    .eq('id', user.id)
+    .single()
+
+  if (profile?.role !== 'admin') redirect('/dashboard')
+
+  const [
+    { count: userCount },
+    { count: courseCount },
+    { count: enrollmentCount },
+    { data: revenueData },
+  ] = await Promise.all([
+    supabase.from('profiles').select('id', { count: 'exact', head: true }),
+    supabase.from('courses').select('id', { count: 'exact', head: true }),
+    supabase.from('enrollments').select('id', { count: 'exact', head: true }),
+    supabase.from('enrollments').select('amount_paid'),
+  ])
+
+  const totalRevenue = (revenueData || []).reduce((s, e) => s + (e.amount_paid || 0), 0)
+  const platformRevenue = totalRevenue * 0.20
+
+  const stats = [
+    { label: t('dashboard.stats.users'), value: userCount ?? 0 },
+    { label: t('dashboard.stats.courses'), value: courseCount ?? 0 },
+    { label: t('dashboard.stats.enrollments'), value: enrollmentCount ?? 0 },
+    { label: t('dashboard.stats.revenue'), value: formatPrice(platformRevenue) },
+  ]
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <div className="flex items-center justify-between mb-8">
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900">{t('dashboard.title')}</h1>
+            <p className="mt-1 text-gray-500">{t('dashboard.subtitle')}</p>
+          </div>
+          <Link href="/dashboard" className="text-sm text-gray-500 hover:text-gray-700">
+            ←
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          {stats.map(s => (
+            <div key={s.label} className="bg-white rounded-xl border border-gray-200 p-5">
+              <p className="text-sm text-gray-500">{s.label}</p>
+              <p className="mt-1 text-2xl font-bold text-gray-900">{s.value}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="grid sm:grid-cols-2 gap-4">
+          <Link
+            href="/dashboard/admin/users"
+            className="bg-white rounded-xl border border-gray-200 p-6 hover:border-indigo-300 hover:shadow-sm transition-all group"
+          >
+            <div className="text-2xl mb-3">👥</div>
+            <h3 className="font-semibold text-gray-900 group-hover:text-indigo-600">{t('dashboard.users.title')}</h3>
+            <p className="mt-1 text-sm text-gray-500">{t('dashboard.users.subtitle')}</p>
+          </Link>
+          <Link
+            href="/dashboard/admin/courses"
+            className="bg-white rounded-xl border border-gray-200 p-6 hover:border-indigo-300 hover:shadow-sm transition-all group"
+          >
+            <div className="text-2xl mb-3">📚</div>
+            <h3 className="font-semibold text-gray-900 group-hover:text-indigo-600">{t('dashboard.courses.title')}</h3>
+            <p className="mt-1 text-sm text-gray-500">{t('dashboard.courses.subtitle')}</p>
+          </Link>
+        </div>
+      </div>
+    </div>
+  )
+}
