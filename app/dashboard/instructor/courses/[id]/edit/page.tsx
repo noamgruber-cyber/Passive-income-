@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
-import { CATEGORIES } from '@/types'
+import { CATEGORIES, LEVELS } from '@/types'
 import { slugify } from '@/lib/utils'
 
 interface Lesson {
@@ -20,6 +20,7 @@ interface CourseForm {
   title: string
   description: string
   category: string
+  level: string
   price: string
   thumbnail_url: string
   status: 'draft' | 'published'
@@ -32,7 +33,7 @@ export default function EditCoursePage() {
 
   const [form, setForm] = useState<CourseForm>({
     title: '', description: '', category: CATEGORIES[0],
-    price: '0', thumbnail_url: '', status: 'draft',
+    level: LEVELS[0], price: '0', thumbnail_url: '', status: 'draft',
   })
   const [lessons, setLessons] = useState<Lesson[]>([])
   const [saving, setSaving] = useState(false)
@@ -48,6 +49,7 @@ export default function EditCoursePage() {
         title: course.title,
         description: course.description || '',
         category: course.category,
+        level: course.level || LEVELS[0],
         price: String(course.price),
         thumbnail_url: course.thumbnail_url || '',
         status: course.status,
@@ -67,6 +69,7 @@ export default function EditCoursePage() {
       title: form.title,
       description: form.description,
       category: form.category,
+      level: form.level,
       price: parseFloat(form.price) || 0,
       thumbnail_url: form.thumbnail_url || null,
       status: form.status,
@@ -122,11 +125,17 @@ export default function EditCoursePage() {
             <textarea value={form.description} onChange={e => set('description', e.target.value)} rows={3} className="input resize-none" />
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-3 gap-4">
             <div>
               <label className="label">Category</label>
               <select value={form.category} onChange={e => set('category', e.target.value)} className="input">
                 {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
+              </select>
+            </div>
+            <div>
+              <label className="label">Level</label>
+              <select value={form.level} onChange={e => set('level', e.target.value)} className="input">
+                {LEVELS.map(l => <option key={l} value={l}>{l.charAt(0).toUpperCase() + l.slice(1)}</option>)}
               </select>
             </div>
             <div>

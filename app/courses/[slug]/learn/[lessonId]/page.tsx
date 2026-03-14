@@ -1,6 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { notFound, redirect } from 'next/navigation'
-import VideoPlayer from '@/components/VideoPlayer'
+import LessonPlayer from '@/components/LessonPlayer'
 import LessonSidebar from '@/components/LessonSidebar'
 import Link from 'next/link'
 
@@ -15,7 +15,6 @@ export default async function LessonPage({ params }: PageProps) {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) redirect(`/login?redirect=/courses/${slug}/learn/${lessonId}`)
 
-  // Fetch course
   const { data: course } = await supabase
     .from('courses')
     .select('id, title, slug, lessons(*)')
@@ -25,7 +24,6 @@ export default async function LessonPage({ params }: PageProps) {
 
   if (!course) notFound()
 
-  // Check enrollment
   const { data: enrollment } = await supabase
     .from('enrollments')
     .select('id')
@@ -35,7 +33,6 @@ export default async function LessonPage({ params }: PageProps) {
 
   if (!enrollment) redirect(`/courses/${slug}`)
 
-  // Fetch current lesson
   const { data: lesson } = await supabase
     .from('lessons')
     .select('*')
@@ -45,26 +42,20 @@ export default async function LessonPage({ params }: PageProps) {
 
   if (!lesson) notFound()
 
-  // Fetch progress
   const { data: progress } = await supabase
     .from('lesson_progress')
     .select('*')
     .eq('user_id', user.id)
 
   const lessons = course.lessons as Array<{
-    id: string; title: string; video_url: string | null; duration_seconds: number; sort_order: number; is_free_preview: boolean; course_id: string; created_at: string
+    id: string; title: string; video_url: string | null; duration_seconds: number;
+    sort_order: number; is_free_preview: boolean; course_id: string; created_at: string
   }>
   const sortedLessons = [...lessons].sort((a, b) => a.sort_order - b.sort_order)
   const currentIndex = sortedLessons.findIndex(l => l.id === lessonId)
   const nextLesson = sortedLessons[currentIndex + 1]
   const prevLesson = sortedLessons[currentIndex - 1]
   const isLastLesson = !nextLesson
-
-  const completedIds = new Set((progress || []).filter(p => p.completed).map(p => p.lesson_id))
-  // Count lessons already complete (excluding current, which may just be completed)
-  const completedCount = sortedLessons.filter(l => completedIds.has(l.id)).length
-  const isCourseComplete = isLastLesson && completedCount === sortedLessons.length - 1
-
   const nextLessonHref = nextLesson ? `/courses/${slug}/learn/${nextLesson.id}` : undefined
 
   return (
@@ -82,43 +73,28 @@ export default async function LessonPage({ params }: PageProps) {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 py-6 grid lg:grid-cols-4 gap-6">
-        {/* Main content */}
-        <div className="lg:col-span-3 space-y-4">
+        <div className="lg:col-span-3">
           {lesson.video_url ? (
-            <VideoPlayer
-              url={lesson.video_url}
+            <LessonPlayer
+              videoUrl={lesson.video_url}
               lessonId={lesson.id}
+              lessonTitle={lesson.title}
               nextLessonHref={nextLessonHref}
+              isLastLesson={isLastLesson}
             />
           ) : (
-            <div className="bg-gray-200 rounded-xl aspect-video flex items-center justify-center">
-              <p className="text-gray-500">No video for this lesson</p>
-            </div>
-          )}
-
-          <div className="bg-white rounded-xl border border-gray-200 p-6">
-            <h1 className="text-xl font-bold text-gray-900">{lesson.title}</h1>
-          </div>
-
-          {/* Course complete banner */}
-          {isCourseComplete && (
-            <div className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl p-6 text-center">
-              <div className="text-4xl mb-3">🎉</div>
-              <h2 className="text-xl font-bold">Course Complete!</h2>
-              <p className="mt-1 text-indigo-100 text-sm">
-                Congratulations — you&apos;ve finished every lesson in this course.
-              </p>
-              <Link
-                href="/dashboard"
-                className="mt-4 inline-block bg-white text-indigo-700 px-6 py-2 rounded-lg font-medium text-sm hover:bg-indigo-50 transition-colors"
-              >
-                Back to My Learning
-              </Link>
+            <div className="space-y-4">
+              <div className="bg-gray-200 rounded-xl aspect-video flex items-center justify-center">
+                <p className="text-gray-500">No video for this lesson</p>
+              </div>
+              <div className="bg-white rounded-xl border border-gray-200 p-6">
+                <h1 className="text-xl font-bold text-gray-900">{lesson.title}</h1>
+              </div>
             </div>
           )}
 
           {/* Navigation */}
-          <div className="flex justify-between">
+          <div className="flex justify-between mt-4">
             {prevLesson ? (
               <Link
                 href={`/courses/${slug}/learn/${prevLesson.id}`}
@@ -138,7 +114,6 @@ export default async function LessonPage({ params }: PageProps) {
           </div>
         </div>
 
-        {/* Sidebar */}
         <div className="lg:col-span-1">
           <LessonSidebar
             lessons={sortedLessons as import('@/types').Lesson[]}

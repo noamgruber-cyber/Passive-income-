@@ -19,6 +19,7 @@ export interface Course {
   price: number
   thumbnail_url: string | null
   preview_video_url: string | null
+  level: 'beginner' | 'intermediate' | 'advanced'
   status: 'draft' | 'published'
   platform_fee_pct: number
   created_at: string
@@ -71,3 +72,6 @@ export const CATEGORIES = [
 ] as const
 
 export type Category = (typeof CATEGORIES)[number]
+
+export const LEVELS = ['beginner', 'intermediate', 'advanced'] as const
+export type Level = (typeof LEVELS)[number]

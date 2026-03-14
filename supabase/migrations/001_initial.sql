@@ -52,6 +52,7 @@ CREATE TABLE IF NOT EXISTS courses (
   price NUMERIC(10,2) NOT NULL DEFAULT 0,
   thumbnail_url TEXT,
   preview_video_url TEXT,
+  level TEXT NOT NULL DEFAULT 'beginner' CHECK (level IN ('beginner', 'intermediate', 'advanced')),
   status TEXT NOT NULL DEFAULT 'draft' CHECK (status IN ('draft', 'published')),
   platform_fee_pct INTEGER NOT NULL DEFAULT 20,
   created_at TIMESTAMPTZ DEFAULT NOW(),

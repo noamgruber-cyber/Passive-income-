@@ -31,9 +31,22 @@ export default function CourseCard({ course }: CourseCardProps) {
           )}
         </div>
         <div className="p-4">
-          <span className="text-xs font-medium text-indigo-600 uppercase tracking-wide">
-            {course.category}
-          </span>
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-medium text-indigo-600 uppercase tracking-wide">
+              {course.category}
+            </span>
+            {course.level && (
+              <span className={`text-xs font-medium px-1.5 py-0.5 rounded ${
+                course.level === 'beginner'
+                  ? 'bg-green-50 text-green-700'
+                  : course.level === 'intermediate'
+                  ? 'bg-yellow-50 text-yellow-700'
+                  : 'bg-red-50 text-red-700'
+              }`}>
+                {course.level.charAt(0).toUpperCase() + course.level.slice(1)}
+              </span>
+            )}
+          </div>
           <h3 className="mt-1 font-semibold text-gray-900 group-hover:text-indigo-600 transition-colors line-clamp-2">
             {course.title}
           </h3>

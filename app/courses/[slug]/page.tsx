@@ -69,9 +69,16 @@ export default async function CourseDetailPage({ params }: PageProps) {
       <div className="bg-gray-900 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid md:grid-cols-3 gap-8">
           <div className="md:col-span-2">
-            <span className="text-indigo-400 text-sm font-medium uppercase tracking-wide">
-              {course.category}
-            </span>
+            <div className="flex items-center gap-3">
+              <span className="text-indigo-400 text-sm font-medium uppercase tracking-wide">
+                {course.category}
+              </span>
+              {course.level && (
+                <span className="text-xs font-medium bg-white/10 text-gray-300 px-2 py-0.5 rounded capitalize">
+                  {course.level}
+                </span>
+              )}
+            </div>
             <h1 className="mt-2 text-3xl font-bold">{course.title}</h1>
             <p className="mt-4 text-gray-300 leading-relaxed">{course.description}</p>
             <p className="mt-4 text-sm text-gray-400">

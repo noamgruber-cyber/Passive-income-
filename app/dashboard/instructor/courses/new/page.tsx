@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
-import { CATEGORIES } from '@/types'
+import { CATEGORIES, LEVELS } from '@/types'
 import { slugify } from '@/lib/utils'
 
 export default function NewCoursePage() {
@@ -15,6 +15,7 @@ export default function NewCoursePage() {
     title: '',
     description: '',
     category: CATEGORIES[0],
+    level: LEVELS[0],
     price: '',
     thumbnail_url: '',
     preview_video_url: '',
@@ -41,6 +42,7 @@ export default function NewCoursePage() {
         slug,
         description: form.description,
         category: form.category,
+        level: form.level,
         price: parseFloat(form.price) || 0,
         thumbnail_url: form.thumbnail_url || null,
         preview_video_url: form.preview_video_url || null,
@@ -94,7 +96,7 @@ export default function NewCoursePage() {
             />
           </Field>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-3 gap-4">
             <Field label="Category" required>
               <select
                 value={form.category}
@@ -102,6 +104,15 @@ export default function NewCoursePage() {
                 className="input"
               >
                 {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
+              </select>
+            </Field>
+            <Field label="Level" required>
+              <select
+                value={form.level}
+                onChange={e => set('level', e.target.value)}
+                className="input"
+              >
+                {LEVELS.map(l => <option key={l} value={l}>{l.charAt(0).toUpperCase() + l.slice(1)}</option>)}
               </select>
             </Field>
             <Field label="Price (USD)" required>
