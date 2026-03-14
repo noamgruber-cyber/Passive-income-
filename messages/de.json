@@ -1,0 +1,322 @@
+{
+  "common": {
+    "free": "Kostenlos",
+    "save": "Änderungen speichern",
+    "saving": "Wird gespeichert…",
+    "back": "Zurück",
+    "loading": "Wird geladen…",
+    "error": "Etwas ist schiefgelaufen",
+    "retry": "Erneut versuchen",
+    "goHome": "Zur Startseite"
+  },
+  "nav": {
+    "browseCourses": "Kurse entdecken",
+    "teach": "Unterrichten",
+    "myLearning": "Mein Lernen",
+    "settings": "Einstellungen",
+    "signOut": "Abmelden",
+    "signIn": "Anmelden",
+    "getStarted": "Loslegen"
+  },
+  "landing": {
+    "hero": {
+      "title": "Lernen ohne Grenzen",
+      "subtitle": "Entfalte dein Potenzial mit expertengeführten Kursen in Programmierung, Design, Business und mehr. Fang heute an — kostenlose und kostenpflichtige Kurse verfügbar.",
+      "browseCourses": "Kurse entdecken",
+      "startTeaching": "Unterrichten beginnen →"
+    },
+    "stats": {
+      "courses": "Kurse",
+      "students": "Studierende",
+      "payout": "Auszahlung"
+    },
+    "features": {
+      "title": "Warum LearnHub?",
+      "subtitle": "Alles, was du zum Lernen und Wachsen brauchst",
+      "items": [
+        { "icon": "🎓", "title": "Experten-Dozenten", "desc": "Lerne von Branchenprofis mit echter Praxiserfahrung." },
+        { "icon": "🚀", "title": "Lerne in deinem Tempo", "desc": "Lebenslanger Zugang zu Kursinhalten. Lerne jederzeit und überall." },
+        { "icon": "💰", "title": "Erschwingliche Preise", "desc": "Kostenlose Kurse verfügbar. Kostenpflichtige Kurse für jedes Budget." },
+        { "icon": "📜", "title": "Zertifikate", "desc": "Erhalte Abschlusszertifikate, um deine Fähigkeiten nachzuweisen." },
+        { "icon": "📱", "title": "Mobilfreundlich", "desc": "Greife von jedem Gerät auf deine Kurse zu." },
+        { "icon": "🤝", "title": "Werde Dozent", "desc": "Teile dein Wissen und verdiene 80 % bei jedem Verkauf." }
+      ]
+    },
+    "featuredCourses": {
+      "title": "Empfohlene Kurse",
+      "subtitle": "Handverlesen von unserem Team",
+      "viewAll": "Alle anzeigen →"
+    },
+    "instructorCta": {
+      "title": "Mach dein Know-how zu Einnahmen",
+      "subtitle": "Schließe dich Tausenden von Dozenten an, die passives Einkommen erzielen, indem sie ihr Wissen teilen. Du behältst {pct}% von jedem Verkauf — wir kümmern uns um den Rest.",
+      "cta": "Heute mit Unterrichten beginnen →"
+    },
+    "footer": {
+      "tagline": "Die Plattform, die das Lernen an erste Stelle stellt.",
+      "copyright": "© {year} LearnHub. Erstellt mit Next.js und Supabase."
+    }
+  },
+  "courses": {
+    "title": "Kurse entdecken",
+    "subtitle": "Lerne von Experten-Dozenten in deinem eigenen Tempo",
+    "searchPlaceholder": "Kurse suchen…",
+    "allCategories": "Alle Kategorien",
+    "searchButton": "Suchen",
+    "clearButton": "Zurücksetzen",
+    "noResults": "Keine Kurse gefunden. Versuche deine Suche anzupassen.",
+    "level": {
+      "beginner": "Anfänger",
+      "intermediate": "Fortgeschrittene",
+      "advanced": "Experte"
+    }
+  },
+  "courseDetail": {
+    "lessons": "{count, plural, one {# Lektion} other {# Lektionen}}",
+    "total": "gesamt",
+    "instructorLabel": "Dozent",
+    "curriculum": "Kursinhalt",
+    "preview": "Vorschau",
+    "includes": {
+      "lifetime": "Lebenslanger Zugang",
+      "certificate": "Abschlusszertifikat"
+    },
+    "enrollFree": "Kostenlos einschreiben",
+    "buyFor": "Kaufen für {price}",
+    "continueLearning": "Weiterlernen →",
+    "processing": "Wird verarbeitet…",
+    "alreadyEnrolled": "Bereits eingeschrieben",
+    "checkout": {
+      "success": "Zahlung erfolgreich! Du bist jetzt eingeschrieben. Fang unten mit dem Lernen an.",
+      "canceled": "Die Zahlung wurde abgebrochen. Deine Karte wurde nicht belastet."
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Willkommen zurück",
+      "subtitle": "Melde dich in deinem Konto an",
+      "email": "E-Mail",
+      "password": "Passwort",
+      "emailPlaceholder": "du@beispiel.de",
+      "passwordPlaceholder": "••••••••",
+      "submit": "Anmelden",
+      "submitting": "Anmeldung läuft…",
+      "noAccount": "Noch kein Konto?",
+      "signUp": "Registrieren"
+    },
+    "register": {
+      "title": "Konto erstellen",
+      "fullName": "Vollständiger Name",
+      "fullNamePlaceholder": "Max Mustermann",
+      "email": "E-Mail",
+      "password": "Passwort",
+      "passwordPlaceholder": "Mindestens 6 Zeichen",
+      "iWantTo": "Ich möchte",
+      "learn": "Lernen",
+      "teach": "Unterrichten",
+      "submit": "Konto erstellen",
+      "submitting": "Konto wird erstellt…",
+      "hasAccount": "Hast du bereits ein Konto?",
+      "signIn": "Anmelden",
+      "checkEmail": {
+        "title": "Prüfe deine E-Mail",
+        "message": "Wir haben einen Bestätigungslink an {email} gesendet. Klicke darauf, um dein Konto zu aktivieren.",
+        "backToSignIn": "Zurück zur Anmeldung"
+      }
+    }
+  },
+  "dashboard": {
+    "welcome": "Willkommen zurück, {name}",
+    "subtitle": "Mach da weiter, wo du aufgehört hast",
+    "myCourses": "Meine Kurse",
+    "browseCourses": "Kurse entdecken",
+    "empty": "Du bist noch in keinem Kurs eingeschrieben",
+    "continueLesson": "Weiterlernen",
+    "startLesson": "Lernen beginnen",
+    "reviewLesson": "Kurs wiederholen",
+    "instructorBanner": {
+      "title": "Du bist Dozent",
+      "subtitle": "Verwalte deine Kurse und verfolge deine Einnahmen",
+      "link": "Dozenten-Dashboard →"
+    },
+    "adminBanner": {
+      "title": "Admin-Bereich",
+      "subtitle": "Verwalte Nutzer und moderiere Kurse",
+      "link": "Admin-Dashboard →"
+    }
+  },
+  "lesson": {
+    "of": "{current} / {total}",
+    "prev": "← Vorherige",
+    "next": "Nächste Lektion →",
+    "noVideo": "Kein Video für diese Lektion",
+    "complete": "✓ Abgeschlossen",
+    "autoAdvance": {
+      "title": "Lektion abgeschlossen!",
+      "countdown": "Nächste Lektion in {seconds}s…",
+      "nextLesson": "Nächste Lektion →",
+      "stay": "Bleiben"
+    },
+    "courseComplete": {
+      "title": "Kurs abgeschlossen!",
+      "subtitle": "Glückwunsch — du hast alle Lektionen dieses Kurses beendet.",
+      "backToLearning": "Zurück zu meinem Lernen"
+    },
+    "sidebar": {
+      "title": "Kursinhalt",
+      "progress": "{completed}/{total} abgeschlossen"
+    }
+  },
+  "instructor": {
+    "dashboard": {
+      "title": "Dozenten-Dashboard",
+      "subtitle": "Verwalte deine Kurse und verfolge deine Einnahmen",
+      "newCourse": "+ Neuer Kurs",
+      "earnings": "Einnahmen",
+      "stats": {
+        "courses": "Kurse gesamt",
+        "students": "Studierende gesamt",
+        "gross": "Bruttoeinnahmen",
+        "net": "Deine Einnahmen (80%)"
+      },
+      "myCourses": "Meine Kurse",
+      "noCourses": "Noch keine Kurse",
+      "createFirst": "Erstelle deinen ersten Kurs →",
+      "edit": "Bearbeiten",
+      "table": {
+        "title": "Titel",
+        "status": "Status",
+        "price": "Preis",
+        "students": "Studierende",
+        "actions": "Aktionen"
+      }
+    },
+    "earnings": {
+      "title": "Einnahmen",
+      "stats": {
+        "students": "Studierende gesamt",
+        "gross": "Bruttoeinnahmen",
+        "platformFee": "Plattformgebühr (20%)",
+        "yours": "Deine Einnahmen"
+      },
+      "byCourse": "Einnahmen nach Kurs",
+      "noSales": "Noch keine kostenpflichtigen Einschreibungen",
+      "recentSales": "Aktuelle Verkäufe",
+      "table": {
+        "course": "Kurs",
+        "students": "Studierende",
+        "gross": "Brutto",
+        "yourCut": "Dein Anteil"
+      },
+      "of": "von {gross}"
+    },
+    "newCourse": {
+      "title": "Neuen Kurs erstellen",
+      "fields": {
+        "title": "Kurstitel",
+        "titlePlaceholder": "z.B. Komplettes Python Bootcamp",
+        "description": "Beschreibung",
+        "descriptionPlaceholder": "Was werden die Studierenden lernen?",
+        "category": "Kategorie",
+        "level": "Niveau",
+        "price": "Preis (USD)",
+        "pricePlaceholder": "0 für kostenlos",
+        "thumbnail": "Vorschaubild-URL",
+        "preview": "Vorschau-Video-URL"
+      },
+      "submit": "Kurs erstellen und Lektionen hinzufügen →",
+      "submitting": "Wird erstellt…"
+    },
+    "editCourse": {
+      "title": "Kurs bearbeiten",
+      "courseDetails": "Kursdetails",
+      "saved": "Gespeichert!",
+      "fields": {
+        "title": "Titel",
+        "description": "Beschreibung",
+        "category": "Kategorie",
+        "level": "Niveau",
+        "price": "Preis (USD)",
+        "thumbnail": "Vorschaubild-URL",
+        "status": "Status",
+        "statusDraft": "Entwurf",
+        "statusPublished": "Veröffentlicht"
+      },
+      "saveButton": "Änderungen speichern",
+      "saving": "Wird gespeichert…",
+      "lessons": "Lektionen ({count})",
+      "addLesson": "Lektion hinzufügen",
+      "lessonTitle": "Lektionstitel",
+      "videoUrl": "Video-URL (YouTube, Vimeo oder direkt)",
+      "freePreview": "Kostenlose Vorschau-Lektion",
+      "addButton": "+ Lektion hinzufügen",
+      "adding": "Wird hinzugefügt…",
+      "delete": "Löschen",
+      "preview": "Vorschau"
+    }
+  },
+  "admin": {
+    "dashboard": {
+      "title": "Admin-Dashboard",
+      "subtitle": "Plattformübersicht und Moderation",
+      "stats": {
+        "users": "Nutzer gesamt",
+        "courses": "Kurse gesamt",
+        "enrollments": "Einschreibungen gesamt",
+        "revenue": "Plattformeinnahmen (20%)"
+      },
+      "users": {
+        "title": "Nutzerverwaltung",
+        "subtitle": "Alle Nutzer anzeigen, Rollen ändern, Konten verwalten"
+      },
+      "courses": {
+        "title": "Kursmoderation",
+        "subtitle": "Kurse prüfen und veröffentlichen/zurückziehen"
+      }
+    },
+    "users": {
+      "title": "Nutzerverwaltung",
+      "table": {
+        "user": "Nutzer",
+        "role": "Rolle",
+        "joined": "Beigetreten",
+        "changeRole": "Rolle ändern"
+      }
+    },
+    "courses": {
+      "title": "Kursmoderation",
+      "table": {
+        "course": "Kurs",
+        "instructor": "Dozent",
+        "price": "Preis",
+        "status": "Status",
+        "actions": "Aktionen"
+      },
+      "publish": "Veröffentlichen",
+      "unpublish": "Zurückziehen"
+    }
+  },
+  "settings": {
+    "title": "Profileinstellungen",
+    "name": "Vollständiger Name",
+    "avatarUrl": "Avatar-URL",
+    "avatarHint": "Füge eine direkte Bild-URL ein (Gravatar, LinkedIn, etc.)",
+    "email": "E-Mail",
+    "emailHint": "E-Mail kann hier nicht geändert werden",
+    "saved": "Profil gespeichert!",
+    "namePlaceholder": "Dein vollständiger Name",
+    "avatarPlaceholder": "https://beispiel.de/avatar.jpg"
+  },
+  "notFound": {
+    "title": "Seite nicht gefunden",
+    "subtitle": "Die gesuchte Seite existiert nicht oder wurde verschoben.",
+    "goHome": "Zur Startseite",
+    "browseCourses": "Kurse entdecken"
+  },
+  "errors": {
+    "coursesTitle": "Kurse konnten nicht geladen werden",
+    "coursesSubtitle": "Es gab ein Problem beim Verbinden mit dem Server.",
+    "dashboardTitle": "Etwas ist schiefgelaufen",
+    "dashboardSubtitle": "Dein Dashboard konnte nicht geladen werden. Bitte versuche es erneut."
+  }
+}

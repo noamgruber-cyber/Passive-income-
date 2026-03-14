@@ -1,0 +1,322 @@
+{
+  "common": {
+    "free": "مجاني",
+    "save": "حفظ التغييرات",
+    "saving": "جارٍ الحفظ…",
+    "back": "رجوع",
+    "loading": "جارٍ التحميل…",
+    "error": "حدث خطأ ما",
+    "retry": "حاول مرة أخرى",
+    "goHome": "الصفحة الرئيسية"
+  },
+  "nav": {
+    "browseCourses": "تصفح الدورات",
+    "teach": "التدريس",
+    "myLearning": "تعلّمي",
+    "settings": "الإعدادات",
+    "signOut": "تسجيل الخروج",
+    "signIn": "تسجيل الدخول",
+    "getStarted": "ابدأ الآن"
+  },
+  "landing": {
+    "hero": {
+      "title": "تعلّم بلا حدود",
+      "subtitle": "أطلق إمكاناتك مع دورات يقودها خبراء في البرمجة والتصميم والأعمال والمزيد. ابدأ اليوم — دورات مجانية ومدفوعة متاحة.",
+      "browseCourses": "تصفح الدورات",
+      "startTeaching": "ابدأ التدريس →"
+    },
+    "stats": {
+      "courses": "دورة",
+      "students": "طالب",
+      "payout": "العائد"
+    },
+    "features": {
+      "title": "لماذا LearnHub؟",
+      "subtitle": "كل ما تحتاجه للتعلم والنمو",
+      "items": [
+        { "icon": "🎓", "title": "مدربون خبراء", "desc": "تعلّم من محترفين في الصناعة بخبرة عملية حقيقية." },
+        { "icon": "🚀", "title": "تعلّم بوتيرتك الخاصة", "desc": "وصول مدى الحياة لمحتوى الدورة. تعلّم في أي وقت ومن أي مكان." },
+        { "icon": "💰", "title": "أسعار معقولة", "desc": "دورات مجانية متاحة. دورات مدفوعة بأسعار مناسبة للجميع." },
+        { "icon": "📜", "title": "شهادات", "desc": "احصل على شهادات إتمام لإثبات مهاراتك." },
+        { "icon": "📱", "title": "متوافق مع الجوال", "desc": "ادخل إلى دوراتك من أي جهاز، في أي وقت." },
+        { "icon": "🤝", "title": "كن مدرّباً", "desc": "شارك معرفتك واكسب 80% من كل عملية بيع." }
+      ]
+    },
+    "featuredCourses": {
+      "title": "الدورات المميزة",
+      "subtitle": "مختارة بعناية من فريقنا",
+      "viewAll": "عرض الكل →"
+    },
+    "instructorCta": {
+      "title": "حوّل خبرتك إلى دخل",
+      "subtitle": "انضم إلى آلاف المدربين الذين يكسبون دخلاً سلبياً بمشاركة معرفتهم. أنت تحتفظ بـ{pct}% من كل عملية بيع — نحن نتولى الباقي.",
+      "cta": "ابدأ التدريس اليوم →"
+    },
+    "footer": {
+      "tagline": "المنصة التي تضع التعلم في المقام الأول.",
+      "copyright": "© {year} LearnHub. مبني بـ Next.js و Supabase."
+    }
+  },
+  "courses": {
+    "title": "تصفح الدورات",
+    "subtitle": "تعلّم من مدربين خبراء بوتيرتك الخاصة",
+    "searchPlaceholder": "ابحث عن دورات…",
+    "allCategories": "جميع الفئات",
+    "searchButton": "بحث",
+    "clearButton": "مسح",
+    "noResults": "لم يتم العثور على دورات. حاول تعديل بحثك.",
+    "level": {
+      "beginner": "مبتدئ",
+      "intermediate": "متوسط",
+      "advanced": "متقدم"
+    }
+  },
+  "courseDetail": {
+    "lessons": "{count} درس",
+    "total": "إجمالي",
+    "instructorLabel": "المدرّب",
+    "curriculum": "منهج الدورة",
+    "preview": "معاينة",
+    "includes": {
+      "lifetime": "وصول مدى الحياة",
+      "certificate": "شهادة إتمام"
+    },
+    "enrollFree": "سجّل مجاناً",
+    "buyFor": "اشترِ بـ {price}",
+    "continueLearning": "متابعة التعلم →",
+    "processing": "جارٍ المعالجة…",
+    "alreadyEnrolled": "مسجّل بالفعل",
+    "checkout": {
+      "success": "تمّت عملية الدفع بنجاح! أنت مسجّل الآن. ابدأ التعلم أدناه.",
+      "canceled": "تم إلغاء الدفع. لم يتم خصم أي مبلغ من بطاقتك."
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "مرحباً بعودتك",
+      "subtitle": "سجّل الدخول إلى حسابك",
+      "email": "البريد الإلكتروني",
+      "password": "كلمة المرور",
+      "emailPlaceholder": "you@example.com",
+      "passwordPlaceholder": "••••••••",
+      "submit": "تسجيل الدخول",
+      "submitting": "جارٍ تسجيل الدخول…",
+      "noAccount": "ليس لديك حساب؟",
+      "signUp": "إنشاء حساب"
+    },
+    "register": {
+      "title": "أنشئ حسابك",
+      "fullName": "الاسم الكامل",
+      "fullNamePlaceholder": "أحمد محمد",
+      "email": "البريد الإلكتروني",
+      "password": "كلمة المرور",
+      "passwordPlaceholder": "6 أحرف على الأقل",
+      "iWantTo": "أريد أن",
+      "learn": "أتعلم",
+      "teach": "أدرّس",
+      "submit": "إنشاء حساب",
+      "submitting": "جارٍ إنشاء الحساب…",
+      "hasAccount": "لديك حساب بالفعل؟",
+      "signIn": "تسجيل الدخول",
+      "checkEmail": {
+        "title": "تحقق من بريدك الإلكتروني",
+        "message": "أرسلنا رابط تأكيد إلى {email}. انقر عليه لتفعيل حسابك.",
+        "backToSignIn": "العودة لتسجيل الدخول"
+      }
+    }
+  },
+  "dashboard": {
+    "welcome": "مرحباً بعودتك، {name}",
+    "subtitle": "أكمل من حيث توقفت",
+    "myCourses": "دوراتي",
+    "browseCourses": "تصفح الدورات",
+    "empty": "لم تسجّل في أي دورة بعد",
+    "continueLesson": "متابعة التعلم",
+    "startLesson": "ابدأ التعلم",
+    "reviewLesson": "مراجعة الدورة",
+    "instructorBanner": {
+      "title": "أنت مدرّب",
+      "subtitle": "أدر دوراتك وتتبّع أرباحك",
+      "link": "لوحة تحكم المدرّب →"
+    },
+    "adminBanner": {
+      "title": "لوحة الإدارة",
+      "subtitle": "أدر المستخدمين وراقب الدورات",
+      "link": "لوحة تحكم المدير →"
+    }
+  },
+  "lesson": {
+    "of": "{current} / {total}",
+    "prev": "→ السابق",
+    "next": "← الدرس التالي",
+    "noVideo": "لا يوجد فيديو لهذا الدرس",
+    "complete": "✓ مكتمل",
+    "autoAdvance": {
+      "title": "اكتمل الدرس!",
+      "countdown": "الدرس التالي خلال {seconds} ثوانٍ…",
+      "nextLesson": "← الدرس التالي",
+      "stay": "البقاء"
+    },
+    "courseComplete": {
+      "title": "اكتملت الدورة!",
+      "subtitle": "تهانيّ — لقد أتممت جميع دروس هذه الدورة.",
+      "backToLearning": "العودة إلى تعلّمي"
+    },
+    "sidebar": {
+      "title": "محتوى الدورة",
+      "progress": "{completed}/{total} مكتمل"
+    }
+  },
+  "instructor": {
+    "dashboard": {
+      "title": "لوحة تحكم المدرّب",
+      "subtitle": "أدر دوراتك وتتبّع أرباحك",
+      "newCourse": "+ دورة جديدة",
+      "earnings": "الأرباح",
+      "stats": {
+        "courses": "إجمالي الدورات",
+        "students": "إجمالي الطلاب",
+        "gross": "الإيرادات الإجمالية",
+        "net": "أرباحك (80%)"
+      },
+      "myCourses": "دوراتي",
+      "noCourses": "لا توجد دورات بعد",
+      "createFirst": "أنشئ أول دورة لك →",
+      "edit": "تعديل",
+      "table": {
+        "title": "العنوان",
+        "status": "الحالة",
+        "price": "السعر",
+        "students": "الطلاب",
+        "actions": "الإجراءات"
+      }
+    },
+    "earnings": {
+      "title": "الأرباح",
+      "stats": {
+        "students": "إجمالي الطلاب",
+        "gross": "الإيرادات الإجمالية",
+        "platformFee": "رسوم المنصة (20%)",
+        "yours": "أرباحك"
+      },
+      "byCourse": "الإيرادات حسب الدورة",
+      "noSales": "لا توجد تسجيلات مدفوعة بعد",
+      "recentSales": "المبيعات الأخيرة",
+      "table": {
+        "course": "الدورة",
+        "students": "الطلاب",
+        "gross": "الإجمالي",
+        "yourCut": "نصيبك"
+      },
+      "of": "من {gross}"
+    },
+    "newCourse": {
+      "title": "إنشاء دورة جديدة",
+      "fields": {
+        "title": "عنوان الدورة",
+        "titlePlaceholder": "مثال: دورة Python الشاملة",
+        "description": "الوصف",
+        "descriptionPlaceholder": "ماذا سيتعلم الطلاب؟",
+        "category": "الفئة",
+        "level": "المستوى",
+        "price": "السعر (USD)",
+        "pricePlaceholder": "0 للمجاني",
+        "thumbnail": "رابط الصورة المصغّرة",
+        "preview": "رابط فيديو المعاينة"
+      },
+      "submit": "إنشاء الدورة وإضافة الدروس →",
+      "submitting": "جارٍ الإنشاء…"
+    },
+    "editCourse": {
+      "title": "تعديل الدورة",
+      "courseDetails": "تفاصيل الدورة",
+      "saved": "تم الحفظ!",
+      "fields": {
+        "title": "العنوان",
+        "description": "الوصف",
+        "category": "الفئة",
+        "level": "المستوى",
+        "price": "السعر (USD)",
+        "thumbnail": "رابط الصورة المصغّرة",
+        "status": "الحالة",
+        "statusDraft": "مسودة",
+        "statusPublished": "منشور"
+      },
+      "saveButton": "حفظ التغييرات",
+      "saving": "جارٍ الحفظ…",
+      "lessons": "الدروس ({count})",
+      "addLesson": "إضافة درس",
+      "lessonTitle": "عنوان الدرس",
+      "videoUrl": "رابط الفيديو (YouTube أو Vimeo أو مباشر)",
+      "freePreview": "درس معاينة مجاني",
+      "addButton": "+ إضافة درس",
+      "adding": "جارٍ الإضافة…",
+      "delete": "حذف",
+      "preview": "معاينة"
+    }
+  },
+  "admin": {
+    "dashboard": {
+      "title": "لوحة تحكم المدير",
+      "subtitle": "نظرة عامة على المنصة والإشراف",
+      "stats": {
+        "users": "إجمالي المستخدمين",
+        "courses": "إجمالي الدورات",
+        "enrollments": "إجمالي التسجيلات",
+        "revenue": "إيرادات المنصة (20%)"
+      },
+      "users": {
+        "title": "إدارة المستخدمين",
+        "subtitle": "عرض جميع المستخدمين وتغيير الأدوار وإدارة الحسابات"
+      },
+      "courses": {
+        "title": "إشراف على الدورات",
+        "subtitle": "مراجعة الدورات ونشرها أو إلغاء نشرها"
+      }
+    },
+    "users": {
+      "title": "إدارة المستخدمين",
+      "table": {
+        "user": "المستخدم",
+        "role": "الدور",
+        "joined": "تاريخ الانضمام",
+        "changeRole": "تغيير الدور"
+      }
+    },
+    "courses": {
+      "title": "إشراف على الدورات",
+      "table": {
+        "course": "الدورة",
+        "instructor": "المدرّب",
+        "price": "السعر",
+        "status": "الحالة",
+        "actions": "الإجراءات"
+      },
+      "publish": "نشر",
+      "unpublish": "إلغاء النشر"
+    }
+  },
+  "settings": {
+    "title": "إعدادات الملف الشخصي",
+    "name": "الاسم الكامل",
+    "avatarUrl": "رابط الصورة الرمزية",
+    "avatarHint": "الصق رابط صورة مباشراً (Gravatar أو LinkedIn، إلخ)",
+    "email": "البريد الإلكتروني",
+    "emailHint": "لا يمكن تغيير البريد الإلكتروني هنا",
+    "saved": "تم حفظ الملف الشخصي!",
+    "namePlaceholder": "اسمك الكامل",
+    "avatarPlaceholder": "https://example.com/avatar.jpg"
+  },
+  "notFound": {
+    "title": "الصفحة غير موجودة",
+    "subtitle": "الصفحة التي تبحث عنها غير موجودة أو تم نقلها.",
+    "goHome": "الصفحة الرئيسية",
+    "browseCourses": "تصفح الدورات"
+  },
+  "errors": {
+    "coursesTitle": "فشل تحميل الدورات",
+    "coursesSubtitle": "حدثت مشكلة في الاتصال بالخادم.",
+    "dashboardTitle": "حدث خطأ ما",
+    "dashboardSubtitle": "تعذّر تحميل لوحة التحكم. يرجى المحاولة مرة أخرى."
+  }
+}

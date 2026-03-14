@@ -1,0 +1,322 @@
+{
+  "common": {
+    "free": "Free",
+    "save": "Save Changes",
+    "saving": "Saving…",
+    "back": "Back",
+    "loading": "Loading…",
+    "error": "Something went wrong",
+    "retry": "Try again",
+    "goHome": "Go home"
+  },
+  "nav": {
+    "browseCourses": "Browse Courses",
+    "teach": "Teach",
+    "myLearning": "My Learning",
+    "settings": "Settings",
+    "signOut": "Sign out",
+    "signIn": "Sign in",
+    "getStarted": "Get started"
+  },
+  "landing": {
+    "hero": {
+      "title": "Learn Without Limits",
+      "subtitle": "Unlock your potential with expert-led courses in programming, design, business, and more. Start learning today — free and paid courses available.",
+      "browseCourses": "Browse Courses",
+      "startTeaching": "Start Teaching →"
+    },
+    "stats": {
+      "courses": "Courses",
+      "students": "Students",
+      "payout": "Payout"
+    },
+    "features": {
+      "title": "Why LearnHub?",
+      "subtitle": "Everything you need to learn and grow",
+      "items": [
+        { "icon": "🎓", "title": "Expert Instructors", "desc": "Learn from industry professionals with real-world experience." },
+        { "icon": "🚀", "title": "Learn at Your Pace", "desc": "Lifetime access to course content. Learn anytime, anywhere." },
+        { "icon": "💰", "title": "Affordable Pricing", "desc": "Free courses available. Paid courses priced for everyone." },
+        { "icon": "📜", "title": "Certificates", "desc": "Earn certificates of completion to showcase your skills." },
+        { "icon": "📱", "title": "Mobile Friendly", "desc": "Access your courses from any device, anytime." },
+        { "icon": "🤝", "title": "Become an Instructor", "desc": "Share your knowledge and earn 80% of every course sale." }
+      ]
+    },
+    "featuredCourses": {
+      "title": "Featured Courses",
+      "subtitle": "Handpicked by our team",
+      "viewAll": "View all →"
+    },
+    "instructorCta": {
+      "title": "Turn Your Expertise Into Income",
+      "subtitle": "Join thousands of instructors earning passive income by sharing their knowledge. You keep {pct}% of every sale — we handle the rest.",
+      "cta": "Start Teaching Today →"
+    },
+    "footer": {
+      "tagline": "The platform that puts learning first.",
+      "copyright": "© {year} LearnHub. Built with Next.js & Supabase."
+    }
+  },
+  "courses": {
+    "title": "Browse Courses",
+    "subtitle": "Learn from expert instructors at your own pace",
+    "searchPlaceholder": "Search courses…",
+    "allCategories": "All categories",
+    "searchButton": "Search",
+    "clearButton": "Clear",
+    "noResults": "No courses found. Try adjusting your search.",
+    "level": {
+      "beginner": "Beginner",
+      "intermediate": "Intermediate",
+      "advanced": "Advanced"
+    }
+  },
+  "courseDetail": {
+    "lessons": "{count, plural, one {# lesson} other {# lessons}}",
+    "total": "total",
+    "instructorLabel": "Instructor",
+    "curriculum": "Course Curriculum",
+    "preview": "Preview",
+    "includes": {
+      "lifetime": "Lifetime access",
+      "certificate": "Certificate of completion"
+    },
+    "enrollFree": "Enroll for Free",
+    "buyFor": "Buy for {price}",
+    "continueLearning": "Continue Learning →",
+    "processing": "Processing…",
+    "alreadyEnrolled": "Already enrolled",
+    "checkout": {
+      "success": "Payment successful! You are now enrolled. Start learning below.",
+      "canceled": "Payment was canceled. Your card was not charged."
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Welcome back",
+      "subtitle": "Sign in to your account",
+      "email": "Email",
+      "password": "Password",
+      "emailPlaceholder": "you@example.com",
+      "passwordPlaceholder": "••••••••",
+      "submit": "Sign in",
+      "submitting": "Signing in…",
+      "noAccount": "Don't have an account?",
+      "signUp": "Sign up"
+    },
+    "register": {
+      "title": "Create your account",
+      "fullName": "Full name",
+      "fullNamePlaceholder": "Jane Smith",
+      "email": "Email",
+      "password": "Password",
+      "passwordPlaceholder": "Min 6 characters",
+      "iWantTo": "I want to",
+      "learn": "Learn",
+      "teach": "Teach",
+      "submit": "Create account",
+      "submitting": "Creating account…",
+      "hasAccount": "Already have an account?",
+      "signIn": "Sign in",
+      "checkEmail": {
+        "title": "Check your email",
+        "message": "We sent a confirmation link to {email}. Click it to activate your account.",
+        "backToSignIn": "Back to sign in"
+      }
+    }
+  },
+  "dashboard": {
+    "welcome": "Welcome back, {name}",
+    "subtitle": "Continue where you left off",
+    "myCourses": "My Courses",
+    "browseCourses": "Browse Courses",
+    "empty": "You haven't enrolled in any courses yet",
+    "continueLesson": "Continue Learning",
+    "startLesson": "Start Learning",
+    "reviewLesson": "Review Course",
+    "instructorBanner": {
+      "title": "You're an instructor",
+      "subtitle": "Manage your courses and track earnings",
+      "link": "Instructor Dashboard →"
+    },
+    "adminBanner": {
+      "title": "Admin Panel",
+      "subtitle": "Manage users and moderate courses",
+      "link": "Admin Dashboard →"
+    }
+  },
+  "lesson": {
+    "of": "{current} / {total}",
+    "prev": "← Previous",
+    "next": "Next lesson →",
+    "noVideo": "No video for this lesson",
+    "complete": "✓ Complete",
+    "autoAdvance": {
+      "title": "Lesson complete!",
+      "countdown": "Next lesson in {seconds}s…",
+      "nextLesson": "Next Lesson →",
+      "stay": "Stay"
+    },
+    "courseComplete": {
+      "title": "Course Complete!",
+      "subtitle": "Congratulations — you've finished every lesson in this course.",
+      "backToLearning": "Back to My Learning"
+    },
+    "sidebar": {
+      "title": "Course Content",
+      "progress": "{completed}/{total} completed"
+    }
+  },
+  "instructor": {
+    "dashboard": {
+      "title": "Instructor Dashboard",
+      "subtitle": "Manage your courses and track earnings",
+      "newCourse": "+ New Course",
+      "earnings": "Earnings",
+      "stats": {
+        "courses": "Total Courses",
+        "students": "Total Students",
+        "gross": "Gross Revenue",
+        "net": "Your Earnings (80%)"
+      },
+      "myCourses": "My Courses",
+      "noCourses": "No courses yet",
+      "createFirst": "Create your first course →",
+      "edit": "Edit",
+      "table": {
+        "title": "Title",
+        "status": "Status",
+        "price": "Price",
+        "students": "Students",
+        "actions": "Actions"
+      }
+    },
+    "earnings": {
+      "title": "Earnings",
+      "stats": {
+        "students": "Total Students",
+        "gross": "Gross Revenue",
+        "platformFee": "Platform Fee (20%)",
+        "yours": "Your Earnings"
+      },
+      "byCourse": "Revenue by Course",
+      "noSales": "No paid enrollments yet",
+      "recentSales": "Recent Sales",
+      "table": {
+        "course": "Course",
+        "students": "Students",
+        "gross": "Gross",
+        "yourCut": "Your Cut"
+      },
+      "of": "of {gross}"
+    },
+    "newCourse": {
+      "title": "Create New Course",
+      "fields": {
+        "title": "Course Title",
+        "titlePlaceholder": "e.g. Complete Python Bootcamp",
+        "description": "Description",
+        "descriptionPlaceholder": "What will students learn?",
+        "category": "Category",
+        "level": "Level",
+        "price": "Price (USD)",
+        "pricePlaceholder": "0 for free",
+        "thumbnail": "Thumbnail URL",
+        "preview": "Preview Video URL"
+      },
+      "submit": "Create Course & Add Lessons →",
+      "submitting": "Creating…"
+    },
+    "editCourse": {
+      "title": "Edit Course",
+      "courseDetails": "Course Details",
+      "saved": "Saved!",
+      "fields": {
+        "title": "Title",
+        "description": "Description",
+        "category": "Category",
+        "level": "Level",
+        "price": "Price (USD)",
+        "thumbnail": "Thumbnail URL",
+        "status": "Status",
+        "statusDraft": "Draft",
+        "statusPublished": "Published"
+      },
+      "saveButton": "Save Changes",
+      "saving": "Saving…",
+      "lessons": "Lessons ({count})",
+      "addLesson": "Add Lesson",
+      "lessonTitle": "Lesson title",
+      "videoUrl": "Video URL (YouTube, Vimeo, or direct)",
+      "freePreview": "Free preview lesson",
+      "addButton": "+ Add Lesson",
+      "adding": "Adding…",
+      "delete": "Delete",
+      "preview": "Preview"
+    }
+  },
+  "admin": {
+    "dashboard": {
+      "title": "Admin Dashboard",
+      "subtitle": "Platform overview and moderation",
+      "stats": {
+        "users": "Total Users",
+        "courses": "Total Courses",
+        "enrollments": "Total Enrollments",
+        "revenue": "Platform Revenue (20%)"
+      },
+      "users": {
+        "title": "User Management",
+        "subtitle": "View all users, change roles, manage accounts"
+      },
+      "courses": {
+        "title": "Course Moderation",
+        "subtitle": "Review and publish/unpublish courses"
+      }
+    },
+    "users": {
+      "title": "User Management",
+      "table": {
+        "user": "User",
+        "role": "Role",
+        "joined": "Joined",
+        "changeRole": "Change Role"
+      }
+    },
+    "courses": {
+      "title": "Course Moderation",
+      "table": {
+        "course": "Course",
+        "instructor": "Instructor",
+        "price": "Price",
+        "status": "Status",
+        "actions": "Actions"
+      },
+      "publish": "Publish",
+      "unpublish": "Unpublish"
+    }
+  },
+  "settings": {
+    "title": "Profile Settings",
+    "name": "Full Name",
+    "avatarUrl": "Avatar URL",
+    "avatarHint": "Paste a direct image URL (Gravatar, LinkedIn, etc.)",
+    "email": "Email",
+    "emailHint": "Email cannot be changed here",
+    "saved": "Profile saved!",
+    "namePlaceholder": "Your full name",
+    "avatarPlaceholder": "https://example.com/avatar.jpg"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "subtitle": "The page you're looking for doesn't exist or has been moved.",
+    "goHome": "Go home",
+    "browseCourses": "Browse courses"
+  },
+  "errors": {
+    "coursesTitle": "Failed to load courses",
+    "coursesSubtitle": "There was a problem connecting to the server.",
+    "dashboardTitle": "Something went wrong",
+    "dashboardSubtitle": "We couldn't load your dashboard. Please try again."
+  }
+}

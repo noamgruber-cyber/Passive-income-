@@ -1,0 +1,322 @@
+{
+  "common": {
+    "free": "Gratis",
+    "save": "Guardar cambios",
+    "saving": "Guardando…",
+    "back": "Volver",
+    "loading": "Cargando…",
+    "error": "Algo salió mal",
+    "retry": "Intentar de nuevo",
+    "goHome": "Ir al inicio"
+  },
+  "nav": {
+    "browseCourses": "Explorar cursos",
+    "teach": "Enseñar",
+    "myLearning": "Mi aprendizaje",
+    "settings": "Configuración",
+    "signOut": "Cerrar sesión",
+    "signIn": "Iniciar sesión",
+    "getStarted": "Empezar"
+  },
+  "landing": {
+    "hero": {
+      "title": "Aprende sin límites",
+      "subtitle": "Desbloquea tu potencial con cursos impartidos por expertos en programación, diseño, negocios y más. Empieza hoy — cursos gratuitos y de pago disponibles.",
+      "browseCourses": "Explorar cursos",
+      "startTeaching": "Empezar a enseñar →"
+    },
+    "stats": {
+      "courses": "Cursos",
+      "students": "Estudiantes",
+      "payout": "Pago"
+    },
+    "features": {
+      "title": "¿Por qué LearnHub?",
+      "subtitle": "Todo lo que necesitas para aprender y crecer",
+      "items": [
+        { "icon": "🎓", "title": "Instructores expertos", "desc": "Aprende de profesionales con experiencia real en la industria." },
+        { "icon": "🚀", "title": "Aprende a tu ritmo", "desc": "Acceso de por vida al contenido. Aprende cuando y donde quieras." },
+        { "icon": "💰", "title": "Precios accesibles", "desc": "Cursos gratuitos disponibles. Cursos de pago para todos los presupuestos." },
+        { "icon": "📜", "title": "Certificados", "desc": "Obtén certificados de finalización para demostrar tus habilidades." },
+        { "icon": "📱", "title": "Compatible con móvil", "desc": "Accede a tus cursos desde cualquier dispositivo, en cualquier momento." },
+        { "icon": "🤝", "title": "Conviértete en instructor", "desc": "Comparte tu conocimiento y gana el 80% de cada venta." }
+      ]
+    },
+    "featuredCourses": {
+      "title": "Cursos destacados",
+      "subtitle": "Seleccionados por nuestro equipo",
+      "viewAll": "Ver todos →"
+    },
+    "instructorCta": {
+      "title": "Convierte tu experiencia en ingresos",
+      "subtitle": "Únete a miles de instructores que generan ingresos pasivos compartiendo su conocimiento. Tú te quedas con el {pct}% de cada venta — nosotros nos encargamos del resto.",
+      "cta": "Empieza a enseñar hoy →"
+    },
+    "footer": {
+      "tagline": "La plataforma que pone el aprendizaje primero.",
+      "copyright": "© {year} LearnHub. Creado con Next.js y Supabase."
+    }
+  },
+  "courses": {
+    "title": "Explorar cursos",
+    "subtitle": "Aprende de instructores expertos a tu propio ritmo",
+    "searchPlaceholder": "Buscar cursos…",
+    "allCategories": "Todas las categorías",
+    "searchButton": "Buscar",
+    "clearButton": "Limpiar",
+    "noResults": "No se encontraron cursos. Intenta ajustar tu búsqueda.",
+    "level": {
+      "beginner": "Principiante",
+      "intermediate": "Intermedio",
+      "advanced": "Avanzado"
+    }
+  },
+  "courseDetail": {
+    "lessons": "{count, plural, one {# lección} other {# lecciones}}",
+    "total": "total",
+    "instructorLabel": "Instructor",
+    "curriculum": "Plan de estudios",
+    "preview": "Vista previa",
+    "includes": {
+      "lifetime": "Acceso de por vida",
+      "certificate": "Certificado de finalización"
+    },
+    "enrollFree": "Inscribirse gratis",
+    "buyFor": "Comprar por {price}",
+    "continueLearning": "Continuar aprendiendo →",
+    "processing": "Procesando…",
+    "alreadyEnrolled": "Ya inscrito",
+    "checkout": {
+      "success": "¡Pago exitoso! Ya estás inscrito. Empieza a aprender abajo.",
+      "canceled": "El pago fue cancelado. No se hizo ningún cargo a tu tarjeta."
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Bienvenido de nuevo",
+      "subtitle": "Inicia sesión en tu cuenta",
+      "email": "Correo electrónico",
+      "password": "Contraseña",
+      "emailPlaceholder": "tu@ejemplo.com",
+      "passwordPlaceholder": "••••••••",
+      "submit": "Iniciar sesión",
+      "submitting": "Iniciando sesión…",
+      "noAccount": "¿No tienes una cuenta?",
+      "signUp": "Regístrate"
+    },
+    "register": {
+      "title": "Crea tu cuenta",
+      "fullName": "Nombre completo",
+      "fullNamePlaceholder": "Ana García",
+      "email": "Correo electrónico",
+      "password": "Contraseña",
+      "passwordPlaceholder": "Mínimo 6 caracteres",
+      "iWantTo": "Quiero",
+      "learn": "Aprender",
+      "teach": "Enseñar",
+      "submit": "Crear cuenta",
+      "submitting": "Creando cuenta…",
+      "hasAccount": "¿Ya tienes una cuenta?",
+      "signIn": "Inicia sesión",
+      "checkEmail": {
+        "title": "Revisa tu correo",
+        "message": "Enviamos un enlace de confirmación a {email}. Haz clic en él para activar tu cuenta.",
+        "backToSignIn": "Volver a iniciar sesión"
+      }
+    }
+  },
+  "dashboard": {
+    "welcome": "Bienvenido, {name}",
+    "subtitle": "Continúa donde lo dejaste",
+    "myCourses": "Mis cursos",
+    "browseCourses": "Explorar cursos",
+    "empty": "Todavía no te has inscrito en ningún curso",
+    "continueLesson": "Continuar aprendiendo",
+    "startLesson": "Empezar a aprender",
+    "reviewLesson": "Repasar curso",
+    "instructorBanner": {
+      "title": "Eres instructor",
+      "subtitle": "Gestiona tus cursos y consulta tus ingresos",
+      "link": "Panel de instructor →"
+    },
+    "adminBanner": {
+      "title": "Panel de administración",
+      "subtitle": "Gestiona usuarios y modera cursos",
+      "link": "Panel de administración →"
+    }
+  },
+  "lesson": {
+    "of": "{current} / {total}",
+    "prev": "← Anterior",
+    "next": "Siguiente lección →",
+    "noVideo": "Sin video para esta lección",
+    "complete": "✓ Completado",
+    "autoAdvance": {
+      "title": "¡Lección completada!",
+      "countdown": "Siguiente lección en {seconds}s…",
+      "nextLesson": "Siguiente lección →",
+      "stay": "Quedarse"
+    },
+    "courseComplete": {
+      "title": "¡Curso completado!",
+      "subtitle": "Felicitaciones — terminaste todas las lecciones de este curso.",
+      "backToLearning": "Volver a mi aprendizaje"
+    },
+    "sidebar": {
+      "title": "Contenido del curso",
+      "progress": "{completed}/{total} completados"
+    }
+  },
+  "instructor": {
+    "dashboard": {
+      "title": "Panel de instructor",
+      "subtitle": "Gestiona tus cursos y consulta tus ingresos",
+      "newCourse": "+ Nuevo curso",
+      "earnings": "Ingresos",
+      "stats": {
+        "courses": "Total de cursos",
+        "students": "Total de estudiantes",
+        "gross": "Ingresos brutos",
+        "net": "Tus ganancias (80%)"
+      },
+      "myCourses": "Mis cursos",
+      "noCourses": "Sin cursos aún",
+      "createFirst": "Crea tu primer curso →",
+      "edit": "Editar",
+      "table": {
+        "title": "Título",
+        "status": "Estado",
+        "price": "Precio",
+        "students": "Estudiantes",
+        "actions": "Acciones"
+      }
+    },
+    "earnings": {
+      "title": "Ingresos",
+      "stats": {
+        "students": "Total de estudiantes",
+        "gross": "Ingresos brutos",
+        "platformFee": "Tarifa de plataforma (20%)",
+        "yours": "Tus ganancias"
+      },
+      "byCourse": "Ingresos por curso",
+      "noSales": "Sin inscripciones de pago aún",
+      "recentSales": "Ventas recientes",
+      "table": {
+        "course": "Curso",
+        "students": "Estudiantes",
+        "gross": "Bruto",
+        "yourCut": "Tu parte"
+      },
+      "of": "de {gross}"
+    },
+    "newCourse": {
+      "title": "Crear nuevo curso",
+      "fields": {
+        "title": "Título del curso",
+        "titlePlaceholder": "p.ej. Bootcamp completo de Python",
+        "description": "Descripción",
+        "descriptionPlaceholder": "¿Qué aprenderán los estudiantes?",
+        "category": "Categoría",
+        "level": "Nivel",
+        "price": "Precio (USD)",
+        "pricePlaceholder": "0 para gratuito",
+        "thumbnail": "URL de miniatura",
+        "preview": "URL de video de vista previa"
+      },
+      "submit": "Crear curso y agregar lecciones →",
+      "submitting": "Creando…"
+    },
+    "editCourse": {
+      "title": "Editar curso",
+      "courseDetails": "Detalles del curso",
+      "saved": "¡Guardado!",
+      "fields": {
+        "title": "Título",
+        "description": "Descripción",
+        "category": "Categoría",
+        "level": "Nivel",
+        "price": "Precio (USD)",
+        "thumbnail": "URL de miniatura",
+        "status": "Estado",
+        "statusDraft": "Borrador",
+        "statusPublished": "Publicado"
+      },
+      "saveButton": "Guardar cambios",
+      "saving": "Guardando…",
+      "lessons": "Lecciones ({count})",
+      "addLesson": "Agregar lección",
+      "lessonTitle": "Título de la lección",
+      "videoUrl": "URL de video (YouTube, Vimeo o directo)",
+      "freePreview": "Lección de vista previa gratuita",
+      "addButton": "+ Agregar lección",
+      "adding": "Agregando…",
+      "delete": "Eliminar",
+      "preview": "Vista previa"
+    }
+  },
+  "admin": {
+    "dashboard": {
+      "title": "Panel de administración",
+      "subtitle": "Resumen de la plataforma y moderación",
+      "stats": {
+        "users": "Total de usuarios",
+        "courses": "Total de cursos",
+        "enrollments": "Total de inscripciones",
+        "revenue": "Ingresos de plataforma (20%)"
+      },
+      "users": {
+        "title": "Gestión de usuarios",
+        "subtitle": "Ver todos los usuarios, cambiar roles, gestionar cuentas"
+      },
+      "courses": {
+        "title": "Moderación de cursos",
+        "subtitle": "Revisar y publicar/despublicar cursos"
+      }
+    },
+    "users": {
+      "title": "Gestión de usuarios",
+      "table": {
+        "user": "Usuario",
+        "role": "Rol",
+        "joined": "Se unió",
+        "changeRole": "Cambiar rol"
+      }
+    },
+    "courses": {
+      "title": "Moderación de cursos",
+      "table": {
+        "course": "Curso",
+        "instructor": "Instructor",
+        "price": "Precio",
+        "status": "Estado",
+        "actions": "Acciones"
+      },
+      "publish": "Publicar",
+      "unpublish": "Despublicar"
+    }
+  },
+  "settings": {
+    "title": "Configuración de perfil",
+    "name": "Nombre completo",
+    "avatarUrl": "URL de avatar",
+    "avatarHint": "Pega una URL de imagen directa (Gravatar, LinkedIn, etc.)",
+    "email": "Correo electrónico",
+    "emailHint": "El correo no se puede cambiar aquí",
+    "saved": "¡Perfil guardado!",
+    "namePlaceholder": "Tu nombre completo",
+    "avatarPlaceholder": "https://ejemplo.com/avatar.jpg"
+  },
+  "notFound": {
+    "title": "Página no encontrada",
+    "subtitle": "La página que buscas no existe o ha sido movida.",
+    "goHome": "Ir al inicio",
+    "browseCourses": "Explorar cursos"
+  },
+  "errors": {
+    "coursesTitle": "Error al cargar los cursos",
+    "coursesSubtitle": "Hubo un problema al conectar con el servidor.",
+    "dashboardTitle": "Algo salió mal",
+    "dashboardSubtitle": "No pudimos cargar tu panel. Por favor, inténtalo de nuevo."
+  }
+}
