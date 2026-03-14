@@ -58,6 +58,14 @@ export default async function LessonPage({ params }: PageProps) {
   const currentIndex = sortedLessons.findIndex(l => l.id === lessonId)
   const nextLesson = sortedLessons[currentIndex + 1]
   const prevLesson = sortedLessons[currentIndex - 1]
+  const isLastLesson = !nextLesson
+
+  const completedIds = new Set((progress || []).filter(p => p.completed).map(p => p.lesson_id))
+  // Count lessons already complete (excluding current, which may just be completed)
+  const completedCount = sortedLessons.filter(l => completedIds.has(l.id)).length
+  const isCourseComplete = isLastLesson && completedCount === sortedLessons.length - 1
+
+  const nextLessonHref = nextLesson ? `/courses/${slug}/learn/${nextLesson.id}` : undefined
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -68,6 +76,9 @@ export default async function LessonPage({ params }: PageProps) {
         </Link>
         <span className="text-gray-300">|</span>
         <span className="text-sm font-medium text-gray-900">{lesson.title}</span>
+        <span className="ml-auto text-xs text-gray-400">
+          {currentIndex + 1} / {sortedLessons.length}
+        </span>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 py-6 grid lg:grid-cols-4 gap-6">
@@ -77,6 +88,7 @@ export default async function LessonPage({ params }: PageProps) {
             <VideoPlayer
               url={lesson.video_url}
               lessonId={lesson.id}
+              nextLessonHref={nextLessonHref}
             />
           ) : (
             <div className="bg-gray-200 rounded-xl aspect-video flex items-center justify-center">
@@ -87,6 +99,23 @@ export default async function LessonPage({ params }: PageProps) {
           <div className="bg-white rounded-xl border border-gray-200 p-6">
             <h1 className="text-xl font-bold text-gray-900">{lesson.title}</h1>
           </div>
+
+          {/* Course complete banner */}
+          {isCourseComplete && (
+            <div className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl p-6 text-center">
+              <div className="text-4xl mb-3">🎉</div>
+              <h2 className="text-xl font-bold">Course Complete!</h2>
+              <p className="mt-1 text-indigo-100 text-sm">
+                Congratulations — you&apos;ve finished every lesson in this course.
+              </p>
+              <Link
+                href="/dashboard"
+                className="mt-4 inline-block bg-white text-indigo-700 px-6 py-2 rounded-lg font-medium text-sm hover:bg-indigo-50 transition-colors"
+              >
+                Back to My Learning
+              </Link>
+            </div>
+          )}
 
           {/* Navigation */}
           <div className="flex justify-between">

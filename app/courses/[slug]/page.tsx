@@ -2,7 +2,9 @@ import { createClient } from '@/lib/supabase/server'
 import { notFound } from 'next/navigation'
 import { formatPrice, formatDuration } from '@/lib/utils'
 import PurchaseButton from '@/components/PurchaseButton'
+import CheckoutBanner from '@/components/CheckoutBanner'
 import Image from 'next/image'
+import { Suspense } from 'react'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -60,6 +62,9 @@ export default async function CourseDetailPage({ params }: PageProps) {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <Suspense fallback={null}>
+        <CheckoutBanner />
+      </Suspense>
       {/* Hero */}
       <div className="bg-gray-900 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid md:grid-cols-3 gap-8">

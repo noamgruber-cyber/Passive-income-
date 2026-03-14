@@ -49,6 +49,12 @@ export default function Navbar({ user, profile }: NavbarProps) {
                 >
                   My Learning
                 </Link>
+                <Link
+                  href="/dashboard/settings"
+                  className="text-sm text-gray-500 hover:text-gray-700 font-medium"
+                >
+                  Settings
+                </Link>
                 <button
                   onClick={handleSignOut}
                   className="text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1.5 rounded-lg font-medium transition-colors"
