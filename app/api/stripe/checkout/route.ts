@@ -29,6 +29,18 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Free courses do not require checkout' }, { status: 400 })
     }
 
+    // Prevent double payment
+    const { data: existing } = await supabase
+      .from('enrollments')
+      .select('id')
+      .eq('user_id', user.id)
+      .eq('course_id', courseId)
+      .single()
+
+    if (existing) {
+      return NextResponse.json({ error: 'Already enrolled' }, { status: 409 })
+    }
+
     const origin = request.headers.get('origin') || process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
 
     const session = await stripe.checkout.sessions.create({

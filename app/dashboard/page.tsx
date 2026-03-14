@@ -17,20 +17,20 @@ export default async function DashboardPage() {
     .eq('id', user.id)
     .single()
 
-  // Fetch enrollments with course + lessons
+  // Fetch enrollments with course + lessons (sorted by sort_order)
   const { data: enrollments } = await supabase
     .from('enrollments')
     .select(`
       *,
       course:courses(
         id, title, slug, thumbnail_url, category,
-        lessons(id)
+        lessons(id, sort_order)
       )
     `)
     .eq('user_id', user.id)
     .order('enrolled_at', { ascending: false })
 
-  // Fetch all lesson progress
+  // Fetch all completed lesson progress
   const { data: progress } = await supabase
     .from('lesson_progress')
     .select('lesson_id, completed')
@@ -45,7 +45,7 @@ export default async function DashboardPage() {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-2xl font-bold text-gray-900">
-            Welcome back, {profile?.full_name?.split(' ')[0] || 'Learner'} 👋
+            Welcome back, {profile?.full_name?.split(' ')[0] || 'Learner'}
           </h1>
           <p className="mt-1 text-gray-500">Continue where you left off</p>
         </div>
@@ -61,6 +61,21 @@ export default async function DashboardPage() {
               className="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 transition-colors"
             >
               Instructor Dashboard →
+            </Link>
+          </div>
+        )}
+
+        {profile?.role === 'admin' && (
+          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl flex items-center justify-between">
+            <div>
+              <p className="font-medium text-red-900">Admin Panel</p>
+              <p className="text-sm text-red-600">Manage users and moderate courses</p>
+            </div>
+            <Link
+              href="/dashboard/admin"
+              className="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors"
+            >
+              Admin Dashboard →
             </Link>
           </div>
         )}
@@ -82,11 +97,19 @@ export default async function DashboardPage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {enrollments.map(enrollment => {
               const course = enrollment.course as {
-                id: string; title: string; slug: string; thumbnail_url: string | null; category: string; lessons: { id: string }[]
+                id: string; title: string; slug: string; thumbnail_url: string | null; category: string;
+                lessons: { id: string; sort_order: number }[]
               }
               if (!course) return null
-              const totalLessons = course.lessons?.length || 0
-              const completedCount = course.lessons?.filter(l => completedLessonIds.has(l.id)).length || 0
+
+              const sortedLessons = [...(course.lessons || [])].sort((a, b) => a.sort_order - b.sort_order)
+              const totalLessons = sortedLessons.length
+              const completedCount = sortedLessons.filter(l => completedLessonIds.has(l.id)).length
+              // First lesson that hasn't been completed yet
+              const nextLesson = sortedLessons.find(l => !completedLessonIds.has(l.id)) ?? sortedLessons[0]
+              const learnHref = nextLesson
+                ? `/courses/${course.slug}/learn/${nextLesson.id}`
+                : `/courses/${course.slug}`
 
               return (
                 <div key={enrollment.id} className="bg-white rounded-xl border border-gray-200 overflow-hidden">
@@ -108,10 +131,14 @@ export default async function DashboardPage() {
                       <ProgressBar completed={completedCount} total={totalLessons} />
                     </div>
                     <Link
-                      href={`/courses/${course.slug}`}
+                      href={learnHref}
                       className="mt-3 block text-center bg-indigo-600 text-white py-2 px-4 rounded-lg text-sm font-medium hover:bg-indigo-700 transition-colors"
                     >
-                      {completedCount > 0 ? 'Continue' : 'Start Learning'}
+                      {completedCount > 0 && completedCount < totalLessons
+                        ? 'Continue Learning'
+                        : completedCount === totalLessons && totalLessons > 0
+                        ? 'Review Course'
+                        : 'Start Learning'}
                     </Link>
                   </div>
                 </div>

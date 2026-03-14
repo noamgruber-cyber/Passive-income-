@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { createClient } from '@/lib/supabase/client'
 
 interface PurchaseButtonProps {
   courseId: string
@@ -24,6 +23,7 @@ export default function PurchaseButton({
 }: PurchaseButtonProps) {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
 
   if (isEnrolled && firstLessonId) {
     return (
@@ -49,19 +49,23 @@ export default function PurchaseButton({
 
   const handlePurchase = async () => {
     setLoading(true)
+    setError('')
 
     if (price === 0) {
-      // Free enrollment
-      const supabase = createClient()
-      const { data: { user } } = await supabase.auth.getUser()
-      if (user) {
-        await supabase.from('enrollments').insert({
-          user_id: user.id,
-          course_id: courseId,
-          amount_paid: 0,
-        })
-        router.push(firstLessonId ? `/courses/${courseSlug}/learn/${firstLessonId}` : '/dashboard')
+      // Free enrollment via server API
+      const res = await fetch('/api/courses/enroll', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ courseId }),
+      })
+      const data = await res.json()
+      if (res.ok) {
+        const lessonId = data.firstLessonId
+        router.push(lessonId ? `/courses/${courseSlug}/learn/${lessonId}` : '/dashboard')
         router.refresh()
+      } else {
+        setError(data.error || 'Enrollment failed')
+        setLoading(false)
       }
     } else {
       // Paid — redirect to Stripe checkout
@@ -71,22 +75,31 @@ export default function PurchaseButton({
         body: JSON.stringify({ courseId }),
       })
       const data = await res.json()
-      if (data.url) {
+      if (res.status === 409) {
+        // Already enrolled — refresh to show updated state
+        router.refresh()
+      } else if (data.url) {
         window.location.href = data.url
+      } else {
+        setError(data.error || 'Checkout failed')
+        setLoading(false)
       }
     }
-
-    setLoading(false)
   }
 
   return (
-    <button
-      onClick={handlePurchase}
-      disabled={loading}
-      className="w-full bg-indigo-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-indigo-700 disabled:opacity-50 transition-colors"
-    >
-      {loading ? 'Processing…' : price === 0 ? 'Enroll for Free' : `Buy for ${formatPrice(price)}`}
-    </button>
+    <div>
+      {error && (
+        <p className="mb-2 text-sm text-red-600">{error}</p>
+      )}
+      <button
+        onClick={handlePurchase}
+        disabled={loading}
+        className="w-full bg-indigo-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-indigo-700 disabled:opacity-50 transition-colors"
+      >
+        {loading ? 'Processing…' : price === 0 ? 'Enroll for Free' : `Buy for ${formatPrice(price)}`}
+      </button>
+    </div>
   )
 }
 

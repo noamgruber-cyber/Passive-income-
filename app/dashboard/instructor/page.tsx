@@ -49,12 +49,20 @@ export default async function InstructorDashboard() {
             <h1 className="text-2xl font-bold text-gray-900">Instructor Dashboard</h1>
             <p className="mt-1 text-gray-500">Manage your courses and track earnings</p>
           </div>
-          <Link
-            href="/dashboard/instructor/courses/new"
-            className="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 transition-colors"
-          >
-            + New Course
-          </Link>
+          <div className="flex items-center gap-3">
+            <Link
+              href="/dashboard/instructor/earnings"
+              className="bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors"
+            >
+              Earnings
+            </Link>
+            <Link
+              href="/dashboard/instructor/courses/new"
+              className="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 transition-colors"
+            >
+              + New Course
+            </Link>
+          </div>
         </div>
 
         {/* Stats */}
