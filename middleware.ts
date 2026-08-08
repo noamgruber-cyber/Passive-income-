@@ -6,6 +6,12 @@ import { NextResponse, type NextRequest } from 'next/server'
 const handleI18nRouting = createIntlMiddleware(routing)
 
 export async function middleware(request: NextRequest) {
+  // 0. "/" is דניאל עיצוב שיער — a standalone Hebrew page outside the
+  //    next-intl locale tree. Without this, `localePrefix: 'as-needed'`
+  //    rewrites "/" to "/en" and the salon page is unreachable.
+  //    The LearnHub landing still lives at /en (and /es, /fr, /de, /ar).
+  if (request.nextUrl.pathname === '/') return NextResponse.next()
+
   // 1. Run next-intl locale routing first (handles redirects, locale detection)
   const response = handleI18nRouting(request)
 
@@ -46,24 +52,19 @@ export async function middleware(request: NextRequest) {
 
   if (isProtected && !user) {
     const url = request.nextUrl.clone()
-    const locale = routing.locales.find(
-      l => pathname.startsWith(`/${l}/`) || pathname === `/${l}`
-    )
-    url.pathname =
-      locale && locale !== routing.defaultLocale ? `/${locale}/login` : '/login'
+    const locale =
+      routing.locales.find(l => pathname.startsWith(`/${l}/`) || pathname === `/${l}`) ??
+      routing.defaultLocale
+    url.pathname = `/${locale}/login`
     url.searchParams.set('redirect', pathname)
     return NextResponse.redirect(url)
   }
 
   if (isAuthPage && user) {
-    const locale = routing.locales.find(
-      l => pathname.startsWith(`/${l}/`) || pathname === `/${l}`
-    )
-    const dashPath =
-      locale && locale !== routing.defaultLocale
-        ? `/${locale}/dashboard`
-        : '/dashboard'
-    return NextResponse.redirect(new URL(dashPath, request.url))
+    const locale =
+      routing.locales.find(l => pathname.startsWith(`/${l}/`) || pathname === `/${l}`) ??
+      routing.defaultLocale
+    return NextResponse.redirect(new URL(`/${locale}/dashboard`, request.url))
   }
 
   return response

@@ -45,7 +45,7 @@ export default async function LocaleLayout({
     <html lang={locale} dir={dir} className={geist.variable}>
       <body className="antialiased bg-gray-50 text-gray-900 font-sans">
         <NextIntlClientProvider messages={messages}>
-          <Navbar user={user} profile={profile} locale={locale} />
+          <Navbar user={user} profile={profile} />
           <main>{children}</main>
         </NextIntlClientProvider>
       </body>

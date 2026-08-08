@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin" />
+<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;500;600;700&family=Frank+Ruhl+Libre:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:#F6F1E8;color:#1C1A17;font-family:Assistant,system-ui,sans-serif;letter-spacing:0;-webkit-font-smoothing:antialiased}
+button,input{font-family:inherit;letter-spacing:0;color:inherit}
+bdi{unicode-bidi:isolate}
+a{color:#1D3FA8;text-underline-offset:3px;text-decoration-thickness:1px}
+a:hover{color:#16307E}
+@keyframes sheetUp{from{transform:translateY(14px);opacity:0}to{transform:translateY(0);opacity:1}}
+</style>
+</helmet>
+
+<div dir="rtl" lang="he" style="background:#F6F1E8;color:#1C1A17;font-family:Assistant,system-ui,sans-serif;letter-spacing:0;min-height:100vh;padding-bottom:190px">
+
+<sc-if value="{{ locked }}">
+  <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:28px 18px">
+    <div style="width:100%;max-width:340px">
+      <div style="height:13px;background-image:repeating-linear-gradient(to left,rgba(28,26,23,0.26) 0 1px,transparent 1px 8px);margin-bottom:22px"></div>
+      <p style="margin:0;font-size:14px;font-weight:700;color:#655E53">דניאל עיצוב שיער</p>
+      <h1 style="margin:6px 0 0;font-family:'Frank Ruhl Libre',Georgia,serif;font-weight:700;font-size:40px;line-height:1.2;letter-spacing:0">יומן העבודה</h1>
+      <p style="margin:9px 0 0;font-size:17px;line-height:1.7;color:#1C1A17">הספר פתוח רק לדניאל. הקישו את הקוד.</p>
+
+      <div style="display:flex;gap:10px;margin-top:20px;justify-content:flex-start">
+        <sc-for list="{{ dots }}" as="d" hint-placeholder-count="4">
+          <span style="width:22px;height:22px;border-radius:50%;border:2px solid {{ d.bd }};background:{{ d.bg }};display:block"></span>
+        </sc-for>
+      </div>
+      <p style="margin:10px 0 0;min-height:22px;font-size:15px;font-weight:700;color:#8F5214">{{ lockErr }}</p>
+
+      <div dir="ltr" style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:8px">
+        <sc-for list="{{ keys }}" as="k" hint-placeholder-count="12">
+          <sc-if value="{{ k.isNum }}">
+            <button type="button" onClick="{{ k.press }}" style="min-height:62px;background:#FFFCF6;border:1px solid rgba(28,26,23,0.30);border-radius:3px;cursor:pointer;font-family:'Frank Ruhl Libre',Georgia,serif;font-size:26px;font-weight:500;font-variant-numeric:tabular-nums" style-hover="background:#EBE3D4;border-color:#1C1A17" style-focus="outline:3px solid #1D3FA8;outline-offset:2px">{{ k.label }}</button>
+          </sc-if>
+          <sc-if value="{{ k.isBack }}">
+            <button type="button" onClick="{{ k.press }}" aria-label="מחיקה" style="min-height:62px;background:none;border:1px solid rgba(28,26,23,0.20);border-radius:3px;cursor:pointer;font-size:16px;font-weight:600;color:#655E53" style-hover="border-color:#1C1A17;color:#1C1A17" style-focus="outline:3px solid #1D3FA8;outline-offset:2px">מחק</button>
+          </sc-if>
+          <sc-if value="{{ k.isBlank }}">
+            <span></span>
+          </sc-if>
+        </sc-for>
+      </div>
+
+      <p style="margin:16px 0 0;font-size:14px;line-height:1.7;color:#655E53">קוד לדוגמה: <bdi style="font-weight:700;font-variant-numeric:tabular-nums">4848</bdi> · <a href="./Daniel Salon Homepage.dc.html">חזרה לדף הלקוחות</a></p>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ unlocked }}">
+<div>
+<header style="max-width:1180px;margin-inline:auto;padding:20px 18px 0">
+  <div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:10px">
+    <p style="margin:0;font-size:14px;font-weight:700;color:#655E53">יומן העבודה · דניאל עיצוב שיער</p>
+    <p style="margin:0;font-size:13px;font-weight:500;color:#655E53">מתעדכן בזמן אמת · <bdi style="font-variant-numeric:tabular-nums">{{ nowTime }}</bdi></p>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px;margin-top:8px">
+    <div>
+      <h1 style="margin:0;font-family:'Frank Ruhl Libre',Georgia,serif;font-weight:700;font-size:clamp(30px,3.8vw,44px);line-height:1.2;letter-spacing:0">{{ dateLong }}</h1>
+      <p style="margin:6px 0 0;font-size:16px;font-weight:600;color:#655E53">{{ dayTag }}</p>
+    </div>
+    <div style="display:flex;gap:8px">
+      <button type="button" onClick="{{ goToday }}" style="min-height:46px;padding:0 16px;background:none;border:1px solid rgba(28,26,23,0.30);border-radius:3px;font-size:16px;font-weight:600;cursor:pointer" style-hover="border-color:#1C1A17;background:#EBE3D4" style-focus="outline:3px solid #1D3FA8;outline-offset:2px">היום</button>
+      <button type="button" onClick="{{ prevDay }}" aria-label="יום קודם" style="width:46px;height:46px;background:none;border:1px solid rgba(28,26,23,0.30);border-radius:3px;cursor:pointer;font-size:20px;line-height:1" style-hover="border-color:#1C1A17" style-focus="outline:3px solid #1D3FA8;outline-offset:2px">›</button>
+      <button type="button" onClick="{{ nextDay }}" aria-label="יום הבא" style="width:46px;height:46px;background:none;border:1px solid rgba(28,26,23,0.30);border-radius:3px;cursor:pointer;font-size:20px;line-height:1" style-hover="border-color:#1C1A17" style-focus="outline:3px solid #1D3FA8;outline-offset:2px">‹</button>
+    </div>
+  </div>
+
+  <sc-if value="{{ up.has }}" hint-placeholder-val="{{ true }}">
+    <div style="margin-top:16px;background:#EBE3D4;border:1px solid rgba(28,26,23,0.20);padding:15px 16px 17px;padding-inline-start:34px;background-image:radial-gradient(circle,rgba(28,26,23,0.22) 1.6px,transparent 1.7px);background-size:15px 15px;background-repeat:repeat-y;background-position:9px 10px">
+      <p style="margin:0;font-size:14px;font-weight:700;color:#655E53;line-height:1.4">{{ up.tag }}</p>
+      <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-top:4px">
+        <bdi style="font-family:'Frank Ruhl Libre',Georgia,serif;font-weight:700;font-size:clamp(42px,6vw,60px);line-height:1.05;font-variant-numeric:tabular-nums">{{ up.t }}</bdi>
+        <div style="min-width:0">
+          <p style="margin:0;font-size:22px;font-weight:700;line-height:1.35;overflow-wrap:anywhere">{{ up.name }}</p>
+          <p style="margin:3px 0 0;font-size:15px;font-weight:500;color:#655E53;line-height:1.55">{{ up.svc }} · <bdi dir="ltr" style="font-variant-numeric:tabular-nums">{{ up.range }}</bdi> · <bdi dir="ltr">{{ up.price }}</bdi></p>
+        </div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:9px;margin-top:14px">
+        <a href="{{ up.tel }}" style="flex:1 1 190px;min-height:52px;display:flex;align-items:center;justify-content:center;gap:8px;background:#1D3FA8;color:#FFFCF6;border-radius:3px;text-decoration:none;font-size:17px;font-weight:700" style-hover="background:#16307E" style-focus="outline:3px solid #1C1A17;outline-offset:2px">התקשרו <bdi dir="ltr" style="font-weight:500;font-variant-numeric:tabular-nums">{{ up.phone }}</bdi></a>
+        <a href="{{ up.wa }}" style="flex:1 1 120px;min-height:52px;display:flex;align-items:center;justify-content:center;border:2px solid #1C1A17;border-radius:3px;text-decoration:none;color:#1C1A17;background:#F6F1E8;font-size:17px;font-weight:700" style-hover="background:#EBE3D4" style-focus="outline:3px solid #1D3FA8;outline-offset:2px">וואטסאפ</a>
+        <button type="button" onClick="{{ up.open }}" style="flex:1 1 120px;min-height:52px;background:none;border:1px solid rgba(28,26,23,0.30);border-radius:3px;font-size:17px;font-weight:600;cursor:pointer" style-hover="border-color:#1C1A17;background:#F6F1E8" style-focus="outline:3px solid #1D3FA8;outline-offset:2px">פתחו כרטיס</button>
+      </div>
+    </div>
+  </sc-if>
+  <sc-if value="{{ up.none }}">
+    <div style="margin-top:16px;border:1px dashed rgba(28,26,23,0.30);padding:16px">
+      <p style="margin:0;font-size:18px;font-weight:700;line-height:1.5">{{ up.noneLine }}</p>
+    </div>
+  </sc-if>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;margin-top:16px;background:rgba(28,26,23,0.20);border:1px solid rgba(28,26,23,0.20)">
+    <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
+      <div style="background:#EBE3D4;padding:11px 13px 12px">
+        <p style="margin:0;font-size:13px;font-weight:600;color:#655E53;line-height:1.4">{{ s.label }}</p>
+        <p style="margin:3px 0 0;font-family:'Frank Ruhl Libre',Georgia,serif;font-size:23px;font-weight:500;line-height:1.25;font-variant-numeric:tabular-nums"><bdi dir="ltr">{{ s.value }}</bdi></p>
+        <p style="margin:2px 0 0;font-size:13px;font-weight:500;color:#655E53;line-height:1.45">{{ s.sub }}</p>
+      </div>
+    </sc-for>
+  </div>
+</header>
+
+<sc-if value="{{ moving }}">
+  <div style="position:sticky;top:0;z-index:30;max-width:1180px;margin:12px auto 0;padding-inline:18px">
+    <div style="background:#1C1A17;color:#F6F1E8;padding:11px 14px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;border-radius:3px">
+      <p style="margin:0;font-size:16px;font-weight:600;line-height:1.5">{{ movingLabel }}</p>
+      <button type="button" onClick="{{ cancelMove }}" style="min-height:40px;padding:0 14px;background:none;border:1px solid rgba(246,241,232,0.5);border-radius:3px;font-size:15px;font-weight:600;cursor:pointer;color:#F6F1E8" style-hover="border-color:#F6F1E8" style-focus="outline:3px solid #F6F1E8;outline-offset:2px">ביטול העברה</button>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ hasUndo }}">
+  <div style="max-width:1180px;margin:12px auto 0;padding-inline:18px">
+    <div style="border:2px solid #1C1A17;background:#FFFCF6;padding:10px 13px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;border-radius:3px">
+      <p style="margin:0;font-size:16px;font-weight:700;line-height:1.5">{{ undoLabel }}</p>
+      <div style="display:flex;gap:8px">
+        <button type="button" onClick="{{ runUndo }}" style="min-height:44px;padding:0 16px;background:#1C1A17;color:#F6F1E8;border:0;border-radius:3px;font-size:16px;font-weight:700;cursor:pointer" style-focus="outline:3px solid #1D3FA8;outline-offset:2px">בטלו פעולה</button>
+        <button type="button" onClick="{{ dismissUndo }}" aria-label="סגירה" style="width:44px;height:44px;background:none;border:1px solid rgba(28,26,23,0.30);border-radius:3px;cursor:pointer;font-size:16px" style-hover="border-color:#1C1A17" style-focus="outline:3px solid #1D3FA8;outline-offset:2px">✕</button>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+<main style="max-width:1180px;margin:26px auto 0;padding-inline:18px;display:grid;gap:26px;grid-template-columns:{{ pageCols }};align-items:start">
+
+  <section>
+    <div style="height:13px;background-image:repeating-linear-gradient(to left,rgba(28,26,23,0.26) 0 1px,transparent 1px 8px);margin-bottom:16px"></div>
+
+    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:10px;border-block-end:2px solid #1C1A17;padding-bottom:8px">
+      <h2 style="margin:0;font-family:'Frank Ruhl Libre',Georgia,serif;font-weight:700;font-size:24px;line-height:1.3;letter-spacing:0">הספר</h2>
+      <p style="margin:0;font-size:14px;font-weight:600;color:#655E53"><bdi dir="ltr" style="font-variant-numeric:tabular-nums">{{ hoursLabel }}</bdi></p>
+    </div>
+
+    <sc-if value="{{ closed }}">
+      <div style="margin-top:14px;border:1px dashed rgba(28,26,23,0.30);padding:26px 14px;text-align:center;background-image:repeating-linear-gradient(135deg,rgba(28,26,23,0.05) 0 6px,transparent 6px 12px)">
+        <p style="margin:0;font-size:17px;font-weight:700;color:#655E53">שבת · המספרה סגורה</p>
+      </div>
+    </sc-if>
+
+    <div style="margin-top:12px;display:flex;flex-direction:column;gap:3px">
+      <sc-for list="{{ rows }}" as="r" hint-placeholder-count="10">
+        <div>
+          <sc-if value="{{ r.nowHere }}">
+            <div id="nowline" style="display:grid;grid-template-columns:46px 1fr;gap:9px;align-items:center;padding-block:5px">
+              <p style="margin:0;font-size:12px;font-weight:700;color:#1D3FA8;text-align:end;font-variant-numeric:tabular-nums"><bdi>{{ nowTime }}</bdi></p>
+              <span style="display:block;height:2px;background:#1D3FA8"></span>
+            </div>
+          </sc-if>
+
+          <div style="display:grid;grid-template-columns:46px 1fr;gap:9px;align-items:start">
+            <p style="margin:0;padding-block-start:13px;font-size:13px;font-weight:500;color:#655E53;font-variant-numeric:tabular-nums;text-align:end;line-height:1.2"><bdi>{{ r.t }}</bdi></p>
+
+            <div>
+              <sc-if value="{{ r.isAppt }}">
+                <button type="button" onClick="{{ r.open }}" style="width:100%;min-height:{{ r.hpx }};display:grid;grid-template-columns:1fr auto;gap:10px;align-items:start;text-align:start;background:#EBE3D4;border:1px solid rgba(28,26,23,0.22);border-inline-start:4px solid {{ r.tone }};border-radius:3px;cursor:pointer;padding:9px 12px" style-hover="background:#E2D8C4" style-focus="outline:3px solid #1D3FA8;outline-offset:2px">
+                  <span style="display:flex;flex-direction:column;gap:3px;min-width:0">
+                    <span style="font-size:18px;font-weight:700;line-height:1.35;overflow-wrap:anywhere">{{ r.name }}</span>
+                    <span style="font-size:14px;font-weight:500;color:#655E53;line-height:1.5">{{ r.svc }} · <bdi dir="ltr" style="font-variant-numeric:tabular-nums">{{ r.range }}</bdi> · <bdi>{{ r.dur }}</bdi> דק׳</span>
+                    <sc-if value="{{ r.marked }}">
+                      <span style="font-size:13px;font-weight:700;color:{{ r.tone }};line-height:1.4">{{ r.statusLabel }}</span>
+                    </sc-if>
+                  </span>
+                  <span style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+                    <span style="font-family:'Frank Ruhl Libre',Georgia,serif;font-size:19px;font-weight:500;white-space:nowrap;line-height:1.3">{{ r.price }}</span>
+                    <sc-if value="{{ r.walkIn }}">
+                      <span style="font-size:12px;font-weight:600;color:#655E53">מזדמן</span>
+                    </sc-if>
+                  </span>
+                </button>
+              </sc-if>
+
+              <sc-if value="{{ r.isTarget }}">
+                <button type="button" onClick="{{ r.moveHere }}" style="width:100%;min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:0 11px;background:#1D3FA8;color:#FFFCF6;border:0;border-radius:3px;cursor:pointer" style-hover="background:#16307E" style-focus="outline:3px solid #1C1A17;outline-offset:2px">
+                  <bdi style="font-size:19px;font-weight:700;font-variant-numeric:tabular-nums">{{ r.t }}</bdi>
+                  <span style="font-size:14px;font-weight:700">העבירו לכאן</span>
+                </button>
+              </sc-if>
+
+              <sc-if value="{{ r.isOpen }}">
+                <div style="display:flex;align-items:center;gap:9px;min-height:44px">
+                  <span style="flex:1;height:1px;background:rgba(28,26,23,0.30)"></span>
+                  <span style="font-size:13px;font-weight:500;color:#655E53">פנוי</span>
+                  <button type="button" onClick="{{ r.add }}" aria-label="הוספה לשעה זו" style="width:44px;height:44px;flex:none;background:none;border:1px solid rgba(28,26,23,0.30);border-radius:3px;cursor:pointer;font-size:20px;font-weight:600;line-height:1" style-hover="border-color:#1C1A17;background:#EBE3D4" style-focus="outline:3px solid #1D3FA8;outline-offset:2px">+</button>
+                </div>
+              </sc-if>
+
+              <sc-if value="{{ r.isBlock }}">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:9px;min-height:44px;padding:0 11px;border:1px dashed rgba(28,26,23,0.34);border-radius:3px;background-image:repeating-linear-gradient(135deg,rgba(28,26,23,0.06) 0 6px,transparent 6px 12px)">
+                  <span style="font-size:14px;font-weight:600;color:#655E53">חסום · לא לפרסום</span>
+                  <button type="button" onClick="{{ r.unblock }}" style="min-height:36px;padding:0 12px;background:#F6F1E8;border:1px solid rgba(28,26,23,0.30);border-radius:3px;font-size:14px;font-weight:600;cursor:pointer" style-hover="border-color:#1C1A17" style-focus="outline:3px solid #1D3FA8;outline-offset:2px">פתחו</button>
+                </div>
+              </sc-if>
+
+              <sc-if value="{{ r.isPassed }}">
+                <div style="display:flex;align-items:center;gap:9px;min-height:44px">
+                  <span style="flex:1;border-block-start:1px dashed rgba(28,26,23,0.30)"></span>
+                  <span style="font-size:13px;font-weight:500;color:#655E53">עבר</span>
+                </div>
+              </sc-if>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+
+    <sc-if value="{{ hasUnmarked }}">
+      <div style="margin-top:16px;border:1px solid rgba(28,26,23,0.22);background:#EBE3D4;padding:13px 14px">
+        <p style="margin:0;font-size:15px;font-weight:700;line-height:1.5">{{ unmarkedLine }}</p>
+        <p style="margin:4px 0 0;font-size:14px;line-height:1.6;color:#655E53">לקוח שלא הגיע מסומן כאן — כך יודעים למי לחייב מחיר מלא.</p>
+      </div>
+    </sc-if>
+  </section>
+
+  <sc-if value="{{ showWeekPane }}">
+    <aside style="position:sticky;top:18px">
+      <div style="height:13px;background-image:repeating-linear-gradient(to left,rgba(28,26,23,0.26) 0 1px,transparent 1px 8px);margin-bottom:16px"></div>
+      <h2 style="margin:0 0 8px;font-family:'Frank Ruhl Libre',Georgia,serif;font-weight:700;font-size:24px;line-height:1.3;letter-spacing:0;border-block-end:2px solid #1C1A17;padding-bottom:8px">השבוע</h2>
+      <div style="display:flex;flex-direction:column">
+        <sc-for list="{{ weekDays }}" as="w" hint-placeholder-count="7">
+          <button type="button" onClick="{{ w.select }}" style="width:100%;text-align:start;background:none;border:0;border-block-end:1px solid rgba(28,26,23,0.16);cursor:pointer;padding:11px 4px;display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;min-height:56px" style-hover="background:#EBE3D4" style-focus="outline:3px solid #1D3FA8;outline-offset:-2px">
+            <span style="display:flex;flex-direction:column;align-items:center;min-width:34px">
+              <span style="font-size:13px;font-weight:600;color:#655E53">{{ w.short }}</span>
+              <bdi style="font-size:17px;font-weight:700;font-variant-numeric:tabular-nums">{{ w.dnum }}</bdi>
+            </span>
+            <span style="display:flex;flex-direction:column;gap:5px;min-width:0">
+              <span style="font-size:14px;font-weight:600;line-height:1.4">{{ w.line }}</span>
+              <span style="display:block;height:7px;background:rgba(28,26,23,0.14)">
+                <span style="display:block;height:7px;background:{{ w.barTone }};width:{{ w.barW }}"></span>
+              </span>
+            </span>
+            <span style="font-family:'Frank Ruhl Libre',Georgia,serif;font-size:16px;font-weight:500;white-space:nowrap">{{ w.money }}</span>
+          </button>
+        </sc-for>
+      </div>
+      <p style="margin:12px 0 0;font-size:14px;line-height:1.7;color:#655E53">הסרגל מראה כמה מהיום כבר תפוס. לחיצה על יום פותחת אותו בספר.</p>
+    </aside>
+  </sc-if>
+</main>
+
+<footer style="max-width:1180px;margin:34px auto 0;padding:18px 18px 30px;border-block-start:1px solid rgba(28,26,23,0.20)">
+  <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px">
+    <p style="margin:0;font-size:14px;line-height:1.8;color:#655E53">כיסא אחד · כל שינוי כאן משנה מיד את השעות שהלקוחות רואים ב<a href="./Daniel Salon Homepage.dc.html">דף הבית</a>.</p>
+    <button type="button" onClick="{{ lockOut }}" style="min-height:44px;padding:0 14px;background:none;border:1px solid rgba(28,26,23,0.30);border-radius:3px;font-size:15px;font-weight:600;cursor:pointer" style-hover="border-color:#1C1A17;background:#EBE3D4" style-focus="outline:3px solid #1D3FA8;outline-offset:2px">נעילת היומן</button>
+  </div>
+</footer>
+
+<div style="position:fixed;inset-inline:0;bottom:0;z-index:40;pointer-events:none">
+  <sc-if value="{{ sheetOpen }}">
+    <div style="pointer-events:auto;background:#FFFCF6;border-block-start:2px solid #1C1A17;box-shadow:0 -12px 30px rgba(28,26,23,0.12);animation:{{ sheetAnim }}">
+      <div style="max-width:560px;margin-inline:auto;padding:14px 16px 18px">
+
+        <sc-if value="{{ apptMode }}">
+          <div>
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px">
+              <div style="min-width:0">
+                <p style="margin:0;font-size:22px;font-weight:700;line-height:1.35;overflow-wrap:anywhere">{{ cur.name }}</p>
+                <p style="margin:4px 0 0;font-size:16px;font-weight:500;color:#655E53;line-height:1.55">{{ cur.svc }} · <bdi style="font-variant-numeric:tabular-nums">{{ cur.range }}</bdi> · {{ cur.price }}</p>
+              </div>
+              <button type="button" onClick="{{ closeSheet }}" aria-label="סגירה" style="width:44px;height:44px;flex:none;background:none;border:1px solid rgba(28,26,23,0.30);border-radius:3px;cursor:pointer;font-size:17px;line-height:1" style-hover="border-color:#1C1A17" style-focus="outline:3px solid #1D3FA8;outline-offset:2px">✕</button>
+            </div>
+
+            <div style="display:flex;flex-wrap:wrap;gap:9px;margin-top:13px">
+              <a href="{{ cur.tel }}" style="flex:1 1 150px;min-height:50px;display:flex;align-items:center;justify-content:center;gap:8px;border:2px solid #1C1A17;border-radius:3px;text-decoration:none;color:#1C1A17;background:#F6F1E8;font-size:16px;font-weight:700" style-hover="background:#EBE3D4" style-focus="outline:3px solid #1D3FA8;outline-offset:2px">התקשרו <bdi dir="ltr" style="font-weight:500;font-variant-numeric:tabular-nums">{{ cur.phone }}</bdi></a>
+              <a href="{{ cur.wa }}" style="flex:1 1 120px;min-height:50px;display:flex;align-items:center;justify-content:center;border:2px solid #1C1A17;border-radius:3px;text-decoration:none;color:#1C1A17;background:#F6F1E8;font-size:16px;font-weight:700" style-hover="background:#EBE3D4" style-focus="outline:3px solid #1D3FA8;outline-offset:2px">וואטסאפ</a>
+            </div>
+
+            <p style="margin:15px 0 7px;font-size:14px;font-weight:700;color:#655E53">מה קרה בפועל</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px">
+              <button type="button" onClick="{{ markDone }}" style="min-height:50px;border-radius:3px;cursor:pointer;font-size:16px;font-weight:700;background:{{ cur.doneBg }};color:{{ cur.doneFg }};border:2px solid {{ cur.doneBd }}" style-focus="outline:3px solid #1D3FA8;outline-offset:2px">הגיע</button>
+              <button type="button" onClick="{{ markNoshow }}" style="min-height:50px;border-radius:3px;cursor:pointer;font-size:16px;font-weight:700;background:{{ cur.noBg }};color:{{ cur.noFg }};border:2px solid {{ cur.noBd }}" style-focus="outline:3px solid #1D3FA8;outline-offset:2px">לא הגיע</button>
+            </div>
+            <sc-if value="{{ cur.isNoshow }}">
+              <p style="margin:8px 0 0;font-size:14px;line-height:1.65;color:#8F5214;font-weight:600">מחויב במחיר מלא: {{ cur.price }}. שלחו הודעה בוואטסאפ.</p>
+            </sc-if>
+
+            <div style="display:flex;flex-wrap:wrap;gap:9px;margin-top:15px;border-block-start:1px solid rgba(28,26,23,0.16);padding-top:14px">
+              <button type="button" onClick="{{ startMove }}" style="flex:1 1 170px;min-height:48px;background:none;border:1px solid rgba(28,26,23,0.30);border-radius:3px;font-size:16px;font-weight:600;cursor:pointer" style-hover="border-color:#1C1A17;background:#EBE3D4" style-focus="outline:3px solid #1D3FA8;outline-offset:2px">העבירו לשעה אחרת</button>
+              <button type="button" onClick="{{ cancelAppt }}" style="flex:1 1 130px;min-height:48px;background:none;border:1px solid #8F5214;color:#8F5214;border-radius:3px;font-size:16px;font-weight:700;cursor:pointer" style-hover="background:#8F5214;color:#FFFCF6" style-focus="outline:3px solid #1D3FA8;outline-offset:2px">בטלו תור</button>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ addMode }}">
+          <div>
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px">
+              <p style="margin:0;font-size:20px;font-weight:700;line-height:1.4">רישום ידני · <bdi style="font-variant-numeric:tabular-nums">{{ addAtLabel }}</bdi></p>
+              <button type="button" onClick="{{ closeSheet }}" aria-label="סגירה" style="width:44px;height:44px;flex:none;background:none;border:1px solid rgba(28,26,23,0.30);border-radius:3px;cursor:pointer;font-size:17px;line-height:1" style-hover="border-color:#1C1A17" style-focus="outline:3px solid #1D3FA8;outline-offset:2px">✕</button>
+            </div>
+
+            <sc-if value="{{ blockFirst }}">
+              <div>
+                <button type="button" onClick="{{ blockSlot }}" style="width:100%;margin-top:12px;min-height:54px;background:#1C1A17;color:#F6F1E8;border:0;border-radius:3px;font-size:19px;font-weight:700;cursor:pointer" style-focus="outline:3px solid #1D3FA8;outline-offset:2px">חסמו את השעה</button>
+                <p style="margin:9px 0 0;font-size:14px;line-height:1.65;color:#655E53">שעה חסומה נעלמת מדף הבית ואף אחד לא יכול לקחת אותה. אפשר לבטל מיד אחרי.</p>
+                <p style="margin:14px 0 0;font-size:14px;font-weight:700;color:#655E53;border-block-start:1px solid rgba(28,26,23,0.16);padding-top:13px">או רשמו לקוח לשעה הזאת</p>
+              </div>
+            </sc-if>
+
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-top:12px">
+              <label style="display:block">
+                <span style="display:block;font-size:14px;font-weight:700;color:#655E53;margin-bottom:5px">שם הלקוח</span>
+                <input type="text" value="{{ addName }}" onInput="{{ onAddName }}" placeholder="למשל: רועי" style="width:100%;min-height:50px;padding:0 12px;font-size:17px;font-weight:600;background:#F6F1E8;border:1px solid rgba(28,26,23,0.30);border-radius:3px" style-focus="outline:3px solid #1D3FA8;outline-offset:2px" />
+              </label>
+              <label style="display:block">
+                <span style="display:block;font-size:14px;font-weight:700;color:#655E53;margin-bottom:5px">טלפון · לא חובה</span>
+                <input type="tel" dir="ltr" value="{{ addPhone }}" onInput="{{ onAddPhone }}" placeholder="052-000-0000" style="width:100%;min-height:50px;padding:0 12px;font-size:17px;font-weight:600;background:#F6F1E8;border:1px solid rgba(28,26,23,0.30);border-radius:3px;font-variant-numeric:tabular-nums" style-focus="outline:3px solid #1D3FA8;outline-offset:2px" />
+              </label>
+            </div>
+
+            <p style="margin:13px 0 6px;font-size:14px;font-weight:700;color:#655E53">{{ addRunLabel }}</p>
+            <div style="max-height:190px;overflow-y:auto;display:flex;flex-direction:column;gap:6px;padding-inline-end:2px">
+              <sc-for list="{{ addServices }}" as="v" hint-placeholder-count="4">
+                <sc-if value="{{ v.chosen }}">
+                  <button type="button" onClick="{{ v.select }}" style="width:100%;min-height:48px;display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:6px 12px;background:#1C1A17;color:#F6F1E8;border:0;border-radius:3px;cursor:pointer;text-align:start" style-focus="outline:3px solid #1D3FA8;outline-offset:2px">
+                    <span style="font-size:16px;font-weight:600;line-height:1.4">{{ v.name }}</span>
+                    <span style="font-family:'Frank Ruhl Libre',Georgia,serif;font-size:18px;font-weight:500;white-space:nowrap">{{ v.price }}</span>
+                  </button>
+                </sc-if>
+                <sc-if value="{{ v.free }}">
+                  <button type="button" onClick="{{ v.select }}" style="width:100%;min-height:48px;display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:6px 12px;background:#F6F1E8;border:1px solid rgba(28,26,23,0.26);border-radius:3px;cursor:pointer;text-align:start" style-hover="border-color:#1C1A17;background:#EBE3D4" style-focus="outline:3px solid #1D3FA8;outline-offset:2px">
+                    <span style="font-size:16px;font-weight:600;line-height:1.4">{{ v.name }}</span>
+                    <span style="font-family:'Frank Ruhl Libre',Georgia,serif;font-size:18px;font-weight:500;white-space:nowrap">{{ v.price }}</span>
+                  </button>
+                </sc-if>
+                <sc-if value="{{ v.tight }}">
+                  <div style="width:100%;min-height:48px;display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:6px 12px;border:1px dashed rgba(28,26,23,0.28);border-radius:3px;color:#655E53">
+                    <span style="font-size:16px;font-weight:600;line-height:1.4">{{ v.name }}</span>
+                    <span style="font-size:13px;font-weight:600;white-space:nowrap">צריך רצף ארוך יותר</span>
+                  </div>
+                </sc-if>
+              </sc-for>
+            </div>
+
+            <sc-if value="{{ addReady }}">
+              <button type="button" onClick="{{ commitAdd }}" style="width:100%;margin-top:12px;min-height:54px;background:#1D3FA8;color:#FFFCF6;border:0;border-radius:3px;font-size:19px;font-weight:700;cursor:pointer" style-hover="background:#16307E" style-focus="outline:3px solid #1C1A17;outline-offset:2px">רשמו בספר</button>
+            </sc-if>
+            <sc-if value="{{ addNotReady }}">
+              <div style="width:100%;margin-top:12px;min-height:54px;display:flex;align-items:center;justify-content:center;border:1px dashed rgba(28,26,23,0.34);border-radius:3px;color:#655E53;font-size:17px;font-weight:600">בחרו שירות כדי לרשום</div>
+            </sc-if>
+
+            <sc-if value="{{ blockLater }}">
+              <div>
+                <button type="button" onClick="{{ blockSlot }}" style="width:100%;margin-top:9px;min-height:48px;background:none;border:1px solid rgba(28,26,23,0.30);border-radius:3px;font-size:16px;font-weight:600;cursor:pointer" style-hover="border-color:#1C1A17;background:#EBE3D4" style-focus="outline:3px solid #1D3FA8;outline-offset:2px">חסמו את השעה במקום</button>
+                <p style="margin:9px 0 0;font-size:14px;line-height:1.65;color:#655E53">שעה חסומה נעלמת מדף הבית ואף אחד לא יכול לקחת אותה.</p>
+              </div>
+            </sc-if>
+          </div>
+        </sc-if>
+
+      </div>
+    </div>
+  </sc-if>
+
+  <div style="pointer-events:auto;background:#F6F1E8;border-block-start:1px solid rgba(28,26,23,0.26);padding:10px 14px calc(10px + env(safe-area-inset-bottom))">
+    <div style="max-width:620px;margin-inline:auto;display:grid;grid-template-columns:1fr 1fr auto;gap:9px">
+      <sc-if value="{{ hasNextOpen }}" hint-placeholder-val="{{ true }}">
+        <button type="button" onClick="{{ barAdd }}" style="min-height:54px;background:#1D3FA8;color:#FFFCF6;border:0;border-radius:3px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px" style-hover="background:#16307E" style-focus="outline:3px solid #1C1A17;outline-offset:2px">
+          <span style="font-size:16px;font-weight:700;line-height:1.2">רשמו תור</span>
+          <bdi style="font-size:13px;font-weight:600;font-variant-numeric:tabular-nums;opacity:0.85">{{ barLabel }}</bdi>
+        </button>
+      </sc-if>
+      <sc-if value="{{ hasNextOpen }}" hint-placeholder-val="{{ true }}">
+        <button type="button" onClick="{{ barBlock }}" style="min-height:54px;background:#FFFCF6;border:2px solid #1C1A17;border-radius:3px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px" style-hover="background:#EBE3D4" style-focus="outline:3px solid #1D3FA8;outline-offset:2px">
+          <span style="font-size:16px;font-weight:700;line-height:1.2">חסמו שעה</span>
+          <bdi style="font-size:13px;font-weight:600;font-variant-numeric:tabular-nums;color:#655E53">{{ barLabel }}</bdi>
+        </button>
+      </sc-if>
+      <sc-if value="{{ noNextOpen }}">
+        <div style="grid-column:span 2;min-height:54px;display:flex;align-items:center;justify-content:center;border:1px dashed rgba(28,26,23,0.34);border-radius:3px;color:#655E53;font-size:16px;font-weight:600">אין שעה פנויה ביום הזה</div>
+      </sc-if>
+      <sc-if value="{{ showJump }}">
+        <button type="button" onClick="{{ jumpNow }}" style="min-height:54px;padding:0 15px;background:none;border:1px solid rgba(28,26,23,0.30);border-radius:3px;cursor:pointer;font-size:16px;font-weight:700" style-hover="border-color:#1C1A17;background:#EBE3D4" style-focus="outline:3px solid #1D3FA8;outline-offset:2px">עכשיו</button>
+      </sc-if>
+    </div>
+  </div>
+</div>
+</div>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;demoTime&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;מצב תצוגה&quot;},&quot;load&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:0.62,&quot;min&quot;:0.25,&quot;max&quot;:0.9,&quot;step&quot;:0.05,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;מצב תצוגה&quot;},&quot;showWeek&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;מצב תצוגה&quot;}}">
+class Component extends DCLogic {
+  DAY = ['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'];
+  SHORT = ['א׳','ב׳','ג׳','ד׳','ה׳','ו׳','ש׳'];
+  MONTH = ['ינואר','פברואר','מרץ','אפריל','מאי','יוני','יולי','אוגוסט','ספטמבר','אוקטובר','נובמבר','דצמבר'];
+  HRS = [[9,18],[9,18],[9,18],[9,18],[9,18],[9,14],null];
+  SERVICES = [
+    {n:'תספורת גבר/ילד', m:30, k:'f', a:70, w:30},
+    {n:'תספורת גבר + זקן', m:30, k:'f', a:80, w:16},
+    {n:'עיצוב זקן', m:15, k:'f', a:50, w:8},
+    {n:'צבע', m:60, k:'r', a:100, b:200, w:7},
+    {n:'גוונים לשיער קצר', m:120, k:'o', a:250, w:3},
+    {n:'תספורת אישה', m:30, k:'o', a:120, w:10},
+    {n:'תספורת בת/נערה', m:30, k:'r', a:80, b:120, w:5},
+    {n:'תספורת ראשונה לילד', m:30, k:'f', a:100, w:5},
+    {n:'שעווה לאוזניים, אף וגבות', m:10, k:'f', a:50, w:6},
+    {n:'תספורת תקנית לחיילים', m:30, k:'f', a:60, w:10}
+  ];
+  NAMES = ['אבי לוי','מור בן דוד','יונתן שרעבי','שירה כהן','רועי מזרחי','טל אזולאי','אלירן דהן','דנה פרץ','עומר קלמן','ליאור חדד','גיא אשכנזי','מיכל נחום','יוסי ביטון','אורי שגב','שקד מלכה','רן אוחיון','נועה גבאי','איתי ברקוביץ','ספיר טל','דודו חזן'];
+
+  CODE = '4848';
+  state = { authed:false, code:'', codeErr:false, off:0, sel:null, addAt:null, addName:'', addPhone:'', addSvc:-1, blockFirst:false, ov:{}, cancels:{}, blocks:{}, adds:{}, moves:{}, moving:null, undo:null, wide:false, tick:0 };
+
+  snap(label){ const s = this.state; return {label:label, ov:s.ov, cancels:s.cancels, blocks:s.blocks, adds:s.adds, moves:s.moves}; }
+  doUndo(){
+    const u = this.state.undo;
+    if (!u) return;
+    this.setState({ov:u.ov, cancels:u.cancels, blocks:u.blocks, adds:u.adds, moves:u.moves, undo:null, sel:null, addAt:null, moving:null});
+  }
+  jumpNow(){
+    try {
+      const el = document.getElementById('nowline');
+      if (el) window.scrollTo({top: el.getBoundingClientRect().top + window.scrollY - 140, behavior:'smooth'});
+    } catch(e){}
+  }
+
+  componentDidMount(){
+    this.fit = () => {
+      const w = window.innerWidth >= 1080;
+      if (w !== this.state.wide) this.setState({wide:w});
+    };
+    this.fit();
+    window.addEventListener('resize', this.fit);
+    try { if (window.localStorage.getItem('ds-admin-authed') === '1') this.setState({authed:true}); } catch(e){}
+    if (!this.HRS[this.now().getDay()]) this.setState({off:1});
+    this.timer = setInterval(() => this.setState(s => ({tick:s.tick+1})), 60000);
+    try { this.rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch(e) { this.rm = false; }
+    try { document.documentElement.lang = 'he'; document.documentElement.dir = 'rtl'; } catch(e){}
+  }
+  componentWillUnmount(){
+    if (this.fit) window.removeEventListener('resize', this.fit);
+    clearInterval(this.timer);
+  }
+
+  pad(n){ return (n < 10 ? '0' : '') + n; }
+  fmt(m){ return this.pad(Math.floor(m/60)) + ':' + this.pad(m%60); }
+  key(d){ return d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate(); }
+  fromKey(k){ const p = k.split('-'); return new Date(+p[0], +p[1]-1, +p[2]); }
+  midnight(d){ return new Date(d.getFullYear(), d.getMonth(), d.getDate()); }
+  shift(d, n){ return new Date(d.getFullYear(), d.getMonth(), d.getDate() + n); }
+
+  now(){
+    const d = new Date();
+    const t = String(this.props.demoTime || '').trim();
+    if (/^\d{1,2}:\d{2}$/.test(t)) { const p = t.split(':'); d.setHours(+p[0], +p[1], 0, 0); }
+    return d;
+  }
+
+  rng(str){
+    let h = 2166136261;
+    for (let i=0;i<str.length;i++){ h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); }
+    let a = h >>> 0;
+    return function(){
+      a = a + 0x6D2B79F5 | 0;
+      let t = Math.imul(a ^ a >>> 15, 1 | a);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+
+  disp(s){
+    const L = '\u2066', P = '\u2069';
+    if (s.k === 'r') return L + '₪' + s.a + '–₪' + s.b + P;
+    if (s.k === 'o') return 'מ־' + L + '₪' + s.a + P;
+    return L + '₪' + s.a + P;
+  }
+  money(min, max){
+    const L = '\u2066', P = '\u2069';
+    return min === max ? L + '₪' + min + P : L + '₪' + min + '–₪' + max + P;
+  }
+  svcRange(s){ return [s.a, s.k === 'r' ? s.b : (s.k === 'o' ? Math.round(s.a * 1.4) : s.a)]; }
+
+  pickSvc(r){
+    const total = this.SERVICES.reduce((t,s) => t + s.w, 0);
+    let x = r() * total;
+    for (let i=0;i<this.SERVICES.length;i++){ x -= this.SERVICES[i].w; if (x <= 0) return i; }
+    return 0;
+  }
+
+  genDay(date){
+    const dow = date.getDay(), hrs = this.HRS[dow];
+    if (!hrs) return null;
+    const k = this.key(date), n = (hrs[1]-hrs[0]) * 2, r = this.rng('book-' + k);
+    let load = this.props.load == null ? 0.62 : +this.props.load;
+    load = Math.max(0.25, Math.min(0.9, load));
+    const cells = new Array(n).fill(undefined);
+    const put = (i, a) => {
+      if (i + a.spans > n) return false;
+      for (let j=0;j<a.spans;j++) if (cells[i+j] !== undefined) return false;
+      cells[i] = a;
+      for (let j=1;j<a.spans;j++) cells[i+j] = null;
+      return true;
+    };
+    for (let i=0;i<n;i++){
+      if (cells[i] !== undefined) continue;
+      if (r() >= load) continue;
+      let si = this.pickSvc(r);
+      let spans = Math.max(1, Math.ceil(this.SERVICES[si].m / 30));
+      if (i + spans > n){ si = 0; spans = 1; }
+      const nm = this.NAMES[Math.floor(r() * this.NAMES.length)];
+      const phone = '052-' + (100 + Math.floor(r()*900)) + '-' + (1000 + Math.floor(r()*9000));
+      put(i, {id: k + '#' + i, si: si, spans: spans, name: nm, phone: phone, start: i});
+    }
+    return {k:k, date:date, dow:dow, hrs:hrs, n:n, cells:cells};
+  }
+
+  dayView(date){
+    const g = this.genDay(date);
+    if (!g) return {closed:true, k:this.key(date), date:date, dow:date.getDay(), items:[], n:0};
+    const st = this.state, cells = g.cells.slice();
+    const clear = (i, a) => { for (let j=0;j<a.spans;j++) if (i+j < g.n) cells[i+j] = undefined; };
+    for (let i=0;i<g.n;i++){
+      const a = cells[i];
+      if (a && a.id && (st.moves[a.id] || st.cancels[a.id])) clear(i, a);
+    }
+    const force = (i, a) => {
+      if (i + a.spans > g.n) return;
+      for (let j=0;j<a.spans;j++){
+        const c = cells[i+j];
+        if (c && c.id) clear(i+j, c);
+        else if (c === null){
+          for (let b=i+j;b>=0;b--) if (cells[b] && cells[b].id){ clear(b, cells[b]); break; }
+        } else if (c && c.block) cells[i+j] = undefined;
+      }
+      cells[i] = a;
+      for (let j=1;j<a.spans;j++) cells[i+j] = null;
+    };
+    Object.keys(st.moves).forEach(id => {
+      const t = st.moves[id];
+      if (t.k !== g.k || st.cancels[id]) return;
+      const a = this.findAppt(id);
+      if (a) force(t.i, Object.assign({}, a, {start:t.i}));
+    });
+    Object.keys(st.adds).forEach(id => {
+      const p = id.split('#');
+      if (p[0] !== g.k || st.cancels[id] || st.moves[id]) return;
+      const w = st.adds[id];
+      force(+p[1], {id:id, si:w.si, spans:Math.max(1, Math.ceil(this.SERVICES[w.si].m/30)), name:w.name, phone:w.phone || '', walkIn:true, start:+p[1]});
+    });
+    Object.keys(st.blocks).forEach(id => {
+      const p = id.split('#');
+      if (p[0] !== g.k || !st.blocks[id]) return;
+      const i = +p[1];
+      if (cells[i] === undefined) cells[i] = {block:true, id:id};
+    });
+    const items = [];
+    for (let i=0;i<g.n;i++){
+      const c = cells[i];
+      if (c === null) continue;
+      const m = g.hrs[0]*60 + i*30;
+      if (c === undefined) items.push({kind:'open', i:i, m:m});
+      else if (c.block) items.push({kind:'block', i:i, m:m, id:c.id});
+      else items.push({kind:'appt', i:i, m:m, a:c});
+    }
+    for (let i=items.length-1, run=0; i>=0; i--){
+      if (items[i].kind === 'open'){ run += 1; items[i].run = run; } else run = 0;
+    }
+    return {closed:false, k:g.k, date:date, dow:g.dow, hrs:g.hrs, n:g.n, items:items};
+  }
+
+  findAppt(id){
+    if (this.state.adds[id]){
+      const p = id.split('#'), w = this.state.adds[id];
+      return {id:id, si:w.si, spans:Math.max(1, Math.ceil(this.SERVICES[w.si].m/30)), name:w.name, phone:w.phone || '', walkIn:true};
+    }
+    const p = id.split('#');
+    const g = this.genDay(this.fromKey(p[0]));
+    if (!g) return null;
+    const c = g.cells[+p[1]];
+    return c && c.id === id ? c : null;
+  }
+
+  press(v){
+    const st = this.state;
+    if (v === 'back') return this.setState({code: st.code.slice(0, -1), codeErr:false});
+    if (st.code.length >= 4) return;
+    const code = st.code + v;
+    if (code.length < 4) return this.setState({code:code, codeErr:false});
+    if (code === this.CODE){
+      try { window.localStorage.setItem('ds-admin-authed', '1'); } catch(e){}
+      return this.setState({authed:true, code:'', codeErr:false});
+    }
+    this.setState({code:'', codeErr:true});
+  }
+
+  lockVals(){
+    const st = this.state;
+    const dots = [0,1,2,3].map(i => ({
+      bd: st.codeErr ? '#8F5214' : (i < st.code.length ? '#1C1A17' : 'rgba(28,26,23,0.34)'),
+      bg: i < st.code.length ? '#1C1A17' : 'transparent'
+    }));
+    const keys = ['1','2','3','4','5','6','7','8','9','blank','0','back'].map(k => ({
+      label: k, isNum: k !== 'blank' && k !== 'back', isBack: k === 'back', isBlank: k === 'blank',
+      press: () => this.press(k)
+    }));
+    return {locked:true, unlocked:false, dots:dots, keys:keys, lockErr: st.codeErr ? 'קוד שגוי. נסו שוב.' : ''};
+  }
+
+  set(obj, k, v){ const o = Object.assign({}, obj); if (v === undefined) delete o[k]; else o[k] = v; return o; }
+
+  render_(){}
+
+  renderVals(){
+    const st = this.state;
+    if (!st.authed) return this.lockVals();
+    const now = this.now();
+    const date = this.shift(now, st.off);
+    const view = this.dayView(date);
+    const isToday = st.off === 0;
+    const nowMin = now.getHours()*60 + now.getMinutes();
+    const past = this.midnight(date) < this.midnight(now);
+    const future = this.midnight(date) > this.midnight(now);
+
+    const movingAppt = st.moving ? this.findAppt(st.moving) : null;
+    const movingSpans = movingAppt ? movingAppt.spans : 0;
+
+    let done = 0, noshow = 0, count = 0, minSum = 0, maxSum = 0, openSlots = 0, unmarked = 0, nextAppt = null;
+    view.items.forEach(it => {
+      if (it.kind === 'appt'){
+        const s = this.SERVICES[it.a.si];
+        const status = st.ov[it.a.id];
+        count += 1;
+        if (status === 'done') done += 1;
+        if (status === 'noshow') noshow += 1;
+        if (status !== 'noshow'){ const rg = this.svcRange(s); minSum += rg[0]; maxSum += rg[1]; }
+        if ((past || (isToday && it.m + s.m <= nowMin)) && !status) unmarked += 1;
+        if (!nextAppt && (future || (isToday && it.m + s.m > nowMin)) && st.ov[it.a.id] !== 'noshow') nextAppt = {m:it.m, a:it.a, s:s};
+      } else if (it.kind === 'open'){
+        if (!(past || (isToday && it.m < nowMin + 15))) openSlots += 1;
+      }
+    });
+
+    let nextOpen = null;
+    view.items.forEach(it => {
+      if (nextOpen || it.kind !== 'open') return;
+      if (past || (isToday && it.m < nowMin + 15)) return;
+      nextOpen = it;
+    });
+
+    const up = (() => {
+      if (view.closed) return {has:false, none:true, noneLine:'שבת — המספרה סגורה. היום הבא נפתח ב־' + '\u2066' + '09:00' + '\u2069' + '.'};
+      if (!nextAppt) return {has:false, none:true, noneLine: count === 0 ? 'אין תורים ביומן ליום הזה.' : (isToday ? 'זהו להיום — כל התורים מאחוריך.' : 'אין עוד תורים ביום הזה.')};
+      const a = nextAppt.a, s = nextAppt.s, m = nextAppt.m;
+      const gap = m - nowMin;
+      const tag = !isToday ? 'הראשון ביום' : (gap > 0 ? (gap >= 60 ? 'הבא בתור · בעוד ' + Math.floor(gap/60) + ' שע׳ ' + (gap%60 ? (gap%60) + ' דק׳' : '') : 'הבא בתור · בעוד \u2066' + gap + '\u2069 דק׳') : 'על הכיסא עכשיו');
+      const txt = 'שלום ' + String(a.name).split(' ')[0] + ', כאן דניאל עיצוב שיער.';
+      return {
+        has:true, none:false, tag:tag, t:this.fmt(m), name:a.name, walkIn: !!a.walkIn,
+        svc: s.n, range: this.fmt(m) + '–' + this.fmt(m + s.m), price: this.disp(s),
+        tel: a.phone ? 'tel:' + String(a.phone).replace(/-/g,'') : 'tel:0526186458',
+        phone: a.phone || 'ללא טלפון',
+        wa: 'https://wa.me/972526186458?text=' + encodeURIComponent(txt),
+        open: () => this.setState({sel:a.id, addAt:null, moving:null})
+      };
+    })();
+
+    const nowRowM = (() => {
+      if (!isToday) return -1;
+      let best = -1;
+      view.items.forEach(it => { if (best < 0 && it.m >= nowMin) best = it.m; });
+      return best;
+    })();
+
+    const rows = view.items.map(it => {
+      const isPast = past || (isToday && it.m < nowMin + 15);
+      const base = {t:this.fmt(it.m), nowHere: it.m === nowRowM, hpx:'44px', isAppt:false, isOpen:false, isBlock:false, isPassed:false, isTarget:false, marked:false, walkIn:false, tone:'#1C1A17'};
+      if (it.kind === 'appt'){
+        const a = it.a, s = this.SERVICES[a.si], status = st.ov[a.id];
+        const h = a.spans * 44 + (a.spans - 1) * 3;
+        return Object.assign(base, {
+          isAppt:true, hpx: h + 'px', name:a.name, svc:s.n, walkIn: !!a.walkIn,
+          range: '\u2066' + this.fmt(it.m) + '–' + this.fmt(it.m + s.m) + '\u2069',
+          dur: s.m, price: this.disp(s),
+          marked: !!status, statusLabel: status === 'done' ? '✓ הגיע' : (status === 'noshow' ? '✕ לא הגיע · לחיוב מלא' : ''),
+          tone: status === 'noshow' ? '#8F5214' : (status === 'done' ? '#655E53' : '#1D3FA8'),
+          open: () => this.setState({sel:a.id, addAt:null, moving:null})
+        });
+      }
+      if (it.kind === 'block'){
+        return Object.assign(base, {isBlock:true, unblock: () => this.setState({blocks: this.set(st.blocks, it.id, undefined), undo: this.snap('השעה נפתחה מחדש')})});
+      }
+      if (st.moving && !isPast && (it.run || 1) >= movingSpans){
+        return Object.assign(base, {isTarget:true, moveHere: () => this.setState({moves: this.set(st.moves, st.moving, {k:view.k, i:it.i}), moving:null, sel:null, undo: this.snap('התור הועבר ל־' + this.fmt(it.m))})});
+      }
+      if (isPast) return Object.assign(base, {isPassed:true});
+      return Object.assign(base, {
+        isOpen:true,
+        add: () => this.setState({addAt: view.k + '#' + it.i, addName:'', addPhone:'', addSvc:-1, blockFirst:false, sel:null, moving:null})
+      });
+    });
+
+    const weekSun = this.shift(now, -now.getDay());
+    const weekDays = [];
+    for (let i=0;i<7;i++){
+      const d = this.shift(weekSun, i);
+      const v = this.dayView(d);
+      let c = 0, mn = 0, mx = 0, busySlots = 0;
+      v.items.forEach(it => {
+        if (it.kind !== 'appt') return;
+        const s = this.SERVICES[it.a.si];
+        if (st.ov[it.a.id] === 'noshow') return;
+        c += 1; busySlots += it.a.spans;
+        const rg = this.svcRange(s); mn += rg[0]; mx += rg[1];
+      });
+      const pct = v.n ? Math.round(100 * busySlots / v.n) : 0;
+      const sameDay = this.key(d) === view.k;
+      weekDays.push({
+        short: this.SHORT[d.getDay()], dnum: d.getDate(),
+        line: v.closed ? 'סגור' : (c === 0 ? 'אין תורים' : c + ' תורים · ' + pct + '% מהיום'),
+        barW: pct + '%', barTone: sameDay ? '#1C1A17' : '#1D3FA8',
+        money: v.closed || c === 0 ? '—' : this.money(mn, mx),
+        select: () => this.setState({sel:null, addAt:null, moving:null, off: Math.round((this.midnight(d) - this.midnight(now)) / 86400000)})
+      });
+    }
+
+    const cur = (() => {
+      if (!st.sel) return {};
+      const a = this.findAppt(st.sel);
+      if (!a) return {};
+      const s = this.SERVICES[a.si];
+      const status = st.ov[a.id];
+      let m = null;
+      view.items.forEach(it => { if (it.kind === 'appt' && it.a.id === a.id) m = it.m; });
+      const txt = 'שלום ' + a.name.split(' ')[0] + ', כאן דניאל עיצוב שיער.';
+      return {
+        name:a.name, svc:s.n, phone:a.phone || 'ללא טלפון',
+        range: m == null ? '' : '\u2066' + this.fmt(m) + '–' + this.fmt(m + s.m) + '\u2069',
+        price: this.disp(s),
+        tel: a.phone ? 'tel:' + a.phone.replace(/-/g,'') : 'tel:0526186458',
+        wa: 'https://wa.me/972526186458?text=' + encodeURIComponent(txt),
+        isNoshow: status === 'noshow',
+        doneBg: status === 'done' ? '#1C1A17' : '#F6F1E8', doneFg: status === 'done' ? '#F6F1E8' : '#1C1A17', doneBd: '#1C1A17',
+        noBg: status === 'noshow' ? '#8F5214' : '#F6F1E8', noFg: status === 'noshow' ? '#FFFCF6' : '#8F5214', noBd: '#8F5214'
+      };
+    })();
+
+    const addAt = st.addAt;
+    let addRun = 0, addM = 0;
+    if (addAt){
+      const i = +addAt.split('#')[1];
+      view.items.forEach(it => { if (it.kind === 'open' && it.i === i){ addRun = it.run || 1; addM = it.m; } });
+    }
+    const addMax = addRun * 30;
+    const addServices = this.SERVICES.map((s, i) => ({
+      name:s.n, price:this.disp(s),
+      chosen: i === st.addSvc, free: i !== st.addSvc && s.m <= addMax, tight: s.m > addMax,
+      select: () => this.setState({addSvc:i})
+    }));
+
+    const dl = 'יום ' + this.DAY[view.dow] + ', ' + date.getDate() + ' ב' + this.MONTH[date.getMonth()];
+    const dayTag = isToday ? 'היום' : (st.off === 1 ? 'מחר' : (st.off === -1 ? 'אתמול' : (st.off > 0 ? 'בעוד ' + st.off + ' ימים' : 'לפני ' + (-st.off) + ' ימים')));
+    const hrs = view.hrs;
+
+    return {
+      locked:false, unlocked:true, dots:[], keys:[], lockErr:'',
+      lockOut: () => { try { window.localStorage.setItem('ds-admin-authed', '0'); } catch(e){} this.setState({authed:false, code:'', codeErr:false, sel:null, addAt:null, moving:null}); },
+      nowTime: this.fmt(nowMin),
+      dateLong: dl, dayTag: dayTag, closed: view.closed,
+      hoursLabel: hrs ? this.pad(hrs[0]) + ':00–' + this.pad(hrs[1]) + ':00' : 'סגור',
+      pageCols: st.wide && this.props.showWeek !== false ? 'minmax(0,1fr) 320px' : 'minmax(0,1fr)',
+      showWeekPane: st.wide && this.props.showWeek !== false,
+      prevDay: () => this.setState({off: st.off - 1, sel:null, addAt:null, moving:null}),
+      nextDay: () => this.setState({off: st.off + 1, sel:null, addAt:null, moving:null}),
+      goToday: () => this.setState({off:0, sel:null, addAt:null, moving:null}),
+      stats: [
+        {label:'תורים ביומן', value: view.closed ? '—' : String(count), sub: view.closed ? 'שבת' : (done + noshow > 0 ? done + ' הגיעו · ' + noshow + ' לא' : 'טרם סומנו')},
+        {label:'צפי הכנסה', value: view.closed || count === 0 ? '—' : this.money(minSum, maxSum), sub: noshow > 0 ? 'בלי ' + noshow + ' שלא הגיעו' : 'לפי מחירון'},
+        {label:'שעות פנויות', value: view.closed ? '—' : String(openSlots), sub: openSlots ? '\u2066' + (openSlots*30) + '\u2069 דק׳ שאפשר למכור' : (past || (isToday && (!hrs || nowMin >= hrs[1]*60)) ? 'היום נסגר' : 'היום מלא')}
+      ],
+      rows: rows, weekDays: weekDays,
+      hasUnmarked: unmarked > 0,
+      unmarkedLine: unmarked === 1 ? 'תור אחד שהסתיים עדיין לא סומן' : unmarked + ' תורים שהסתיימו עדיין לא סומנו',
+      moving: !!st.moving, movingLabel: movingAppt ? 'מעבירים את ' + movingAppt.name + ' — בחרו שעה פנויה' : '',
+      cancelMove: () => this.setState({moving:null}),
+      sheetOpen: !!st.sel || !!st.addAt,
+      apptMode: !!st.sel, addMode: !st.sel && !!st.addAt, cur: cur,
+      closeSheet: () => this.setState({sel:null, addAt:null}),
+      markDone: () => this.setState({ov: this.set(st.ov, st.sel, st.ov[st.sel] === 'done' ? undefined : 'done'), undo: this.snap('סומן: הגיע')}),
+      markNoshow: () => this.setState({ov: this.set(st.ov, st.sel, st.ov[st.sel] === 'noshow' ? undefined : 'noshow'), undo: this.snap('סומן: לא הגיע')}),
+      startMove: () => this.setState({moving: st.sel, sel:null}),
+      cancelAppt: () => this.setState({cancels: this.set(st.cancels, st.sel, true), sel:null, undo: this.snap('התור בוטל')}),
+      hasUndo: !!st.undo, undoLabel: st.undo ? st.undo.label : '', runUndo: () => this.doUndo(),
+      dismissUndo: () => this.setState({undo:null}),
+      jumpNow: () => this.jumpNow(), showJump: isToday && nowRowM >= 0,
+      up: up, blockFirst: st.blockFirst, blockLater: !st.blockFirst,
+      barAdd: () => { if (nextOpen) this.setState({addAt: view.k + '#' + nextOpen.i, addName:'', addPhone:'', addSvc:-1, blockFirst:false, sel:null, moving:null}); },
+      barBlock: () => { if (nextOpen) this.setState({addAt: view.k + '#' + nextOpen.i, addName:'', addPhone:'', addSvc:-1, blockFirst:true, sel:null, moving:null}); },
+      barLabel: nextOpen ? '\u2066' + this.fmt(nextOpen.m) + '\u2069' : 'אין שעה פנויה',
+      hasNextOpen: !!nextOpen, noNextOpen: !nextOpen,
+      addPhone: st.addPhone, onAddPhone: (e) => this.setState({addPhone: e.target.value}),
+      addAtLabel: addAt ? this.fmt(addM) : '',
+      addRunLabel: addMax >= 60 ? 'יש כאן \u2066' + addMax + '\u2069 דקות רצוף' : 'חלון של \u2066' + addMax + '\u2069 דקות',
+      addName: st.addName,
+      onAddName: (e) => this.setState({addName: e.target.value}),
+      addServices: addServices,
+      addReady: st.addSvc >= 0, addNotReady: st.addSvc < 0,
+      commitAdd: () => {
+        if (st.addSvc < 0 || !addAt) return;
+        this.setState({adds: this.set(st.adds, addAt, {name: st.addName.trim() || 'מזדמן', phone: st.addPhone.trim(), si: st.addSvc}), addAt:null, addName:'', addPhone:'', addSvc:-1, undo: this.snap('התור נרשם בספר')});
+      },
+      blockSlot: () => this.setState({blocks: this.set(st.blocks, addAt, true), addAt:null, addName:'', addPhone:'', addSvc:-1, blockFirst:false, undo: this.snap('השעה נחסמה')}),
+      sheetAnim: this.rm ? 'none' : 'sheetUp 200ms ease-out both'
+    };
+  }
+}
+</script>
+</body>
+</html>
